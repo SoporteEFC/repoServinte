@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DatosVidaUtil" targetNamespace="http://tempuri.org/DatosVidaUtil.xsd" xmlns:mstns="http://tempuri.org/DatosVidaUtil.xsd" xmlns="http://tempuri.org/DatosVidaUtil.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DatosVidaUtil" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="DatosVidaUtil" msprop:Generator_UserDSName="DatosVidaUtil" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TablaVidaUtil" msprop:Generator_UserTableName="TablaVidaUtil" msprop:Generator_RowDeletedName="TablaVidaUtilRowDeleted" msprop:Generator_TableClassName="TablaVidaUtilDataTable" msprop:Generator_RowChangedName="TablaVidaUtilRowChanged" msprop:Generator_RowClassName="TablaVidaUtilRow" msprop:Generator_RowChangingName="TablaVidaUtilRowChanging" msprop:Generator_RowEvArgName="TablaVidaUtilRowChangeEvent" msprop:Generator_RowEvHandlerName="TablaVidaUtilRowChangeEventHandler" msprop:Generator_TablePropName="TablaVidaUtil" msprop:Generator_TableVarName="tableTablaVidaUtil" msprop:Generator_RowDeletingName="TablaVidaUtilRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ANUMEROCUPO" msprop:Generator_UserColumnName="ANUMEROCUPO" msprop:Generator_ColumnPropNameInRow="ANUMEROCUPO" msprop:Generator_ColumnVarNameInTable="columnANUMEROCUPO" msprop:Generator_ColumnPropNameInTable="ANUMEROCUPOColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="BEMPRESAASOCIADA" msprop:Generator_UserColumnName="BEMPRESAASOCIADA" msprop:Generator_ColumnPropNameInRow="BEMPRESAASOCIADA" msprop:Generator_ColumnVarNameInTable="columnBEMPRESAASOCIADA" msprop:Generator_ColumnPropNameInTable="BEMPRESAASOCIADAColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="CPLACA" msprop:Generator_UserColumnName="CPLACA" msprop:Generator_ColumnPropNameInRow="CPLACA" msprop:Generator_ColumnVarNameInTable="columnCPLACA" msprop:Generator_ColumnPropNameInTable="CPLACAColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="DVIDAUTIL" msprop:Generator_UserColumnName="DVIDAUTIL" msprop:Generator_ColumnPropNameInRow="DVIDAUTIL" msprop:Generator_ColumnVarNameInTable="columnDVIDAUTIL" msprop:Generator_ColumnPropNameInTable="DVIDAUTILColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,1065 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using Word = Microsoft.Office.Interop.Word;
+using System.Reflection;
+using LibreriasSintrat.ServiciosAccesorias;
+using LibreriasSintrat.ServiciosTransito;
+using LibreriasSintrat.ServiciosCuposTrans;
+using LibreriasSintrat.ServiciosTramitesTrans;
+using LibreriasSintrat.ServiciosVehiculos;
+using LibreriasSintrat.ServiciosViewVehiculo;
+using LibreriasSintrat.ServiciosMedidasCautelares;
+using LibreriasSintrat.ServiciosEmpresas;
+using LibreriasSintrat.ServiciosPersonas;
+using LibreriasSintrat.ServiciosPropietarios;
+using LibreriasSintrat.utilidades;
+
+namespace TransportePublico.servicios.tramites
+{
+    public partial class desvporcomunacuerdo : Form
+    {
+        ServiciosCuposTransService clienteCuposTrans;
+        ServiciosTramitesTransService clienteTramitesTrans;
+        ServiciosVehiculosService clienteVehiculos;
+        ServiciosViewVehiculoService clienteViewVehiculos;
+        ServiciosMedidasCautelaresService clienteCautelares;
+        ServiciosAccesoriasService clienteAccesorias;
+
+        cuposTaxisTrans cuposeleccionado = null;
+        Object[] listacupos = null;
+        Object[] listacuposs = null;
+        Object[] listapropietariosaaa;
+
+        int idresolucion = 0;
+        int numpropietario = 0, quees = 0, idp = 0;
+        string myTipoVehiculo;
+        string modelovehi;
+
+        Funciones funciones;
+
+        public desvporcomunacuerdo()
+        {
+            InitializeComponent();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void desvporcomunacuerdo_Load(object sender, EventArgs e)
+        {
+            btnSave.Enabled = false;
+            informacionderegistro.Enabled = false;
+            clienteAccesorias = WS.ServiciosAccesoriasService();
+            clienteCuposTrans = WS.ServiciosCuposTransService();
+            funciones = WS.Funciones();
+
+            Object[] listat = (Object[])clienteCuposTrans.getTipoVehiculoTrans(new tipoVehiculoTrans());// getDiferentesTaxis();
+
+            if (listat != null)
+            {
+                tipovehiculo.DataSource = null;
+                tipovehiculo.DisplayMember = "NOMBRE";
+                tipovehiculo.ValueMember = "ID";
+                funciones.llenarCombo(tipovehiculo, listat);
+            }
+
+            rdNumeroCupo.Checked = true;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            validaciones();
+        }
+
+        private void validaciones()
+        {
+            bool val = true;
+
+            if (tipovehiculo.SelectedIndex < 0)
+            {
+                funciones.mostrarMensaje("Debe Seleccionar un Tipo de Vehículo", "W");
+                tipovehiculo.Focus();
+
+                val = false;
+            }
+            else if (numeroresolucion.Text == "")
+            {
+                funciones.mostrarMensaje("El Campo Número Resolución no Puede ser vacío", "W");
+                numeroresolucion.Focus();
+
+                val = false;
+            }
+            else if (fecharesolucion.Text == "")
+            {
+                funciones.mostrarMensaje("Debe Seleccionar una Fecha de Resolución", "W");
+                fecharesolucion.Focus();
+
+                val = false;
+            }
+            else if (representantelegal.Text == "")
+            {
+                funciones.mostrarMensaje("El Campo Representante Legal Empresa que Desvincula no Puede ser Vacío", "W");
+                representantelegal.Focus();
+
+                val = false;
+            }
+            else if (placavehiculo.Text == "")
+            {
+                funciones.mostrarMensaje("El Vehículo asociado al número de cupo ya ha sido desvinculado de común acuerdo", "W");
+                txtNumeroCupo.Focus();
+
+                val = false;
+            }
+
+            if (val)
+                guardarDatos();
+        }
+
+        private void guardarDatos()
+        {
+            clienteTramitesTrans = WS.ServiciosTramitesTransService();
+            ttResolucionesTrans laresolucion = new ttResolucionesTrans();
+
+            laresolucion.IDTIPORESOLUCION = 3;
+            laresolucion.FECHARESOLUCION = funciones.convFormatoFecha(fecharesolucion.Text, "MM/dd/yyyy");
+
+            laresolucion.NUMERO = numeroresolucion.Text;
+            laresolucion.FECHASOLICITUD = funciones.convFormatoFecha(fechasolicitud.Text, "MM/dd/yyyy");
+
+            idresolucion = clienteTramitesTrans.crearTtResolucionesTrans(laresolucion);
+
+            if (idresolucion > 0)
+            {
+                historicoCupoTrans elhistorico = new historicoCupoTrans();
+                elhistorico.IDCUPO = cuposeleccionado.TT_IDCUPOTAXI;
+
+                if (cuposeleccionado != null && cuposeleccionado.TT_ID_PERSONA > 0)
+                {
+                    elhistorico.IDPERSONA = cuposeleccionado.TT_ID_PERSONA;
+                }
+
+                if (cuposeleccionado != null && cuposeleccionado.TT_IDEMPRESA > 0)
+                {
+                    elhistorico.TT_IDEMPRESA = cuposeleccionado.TT_IDEMPRESA;
+                }
+
+                elhistorico.IDVEHICULO = cuposeleccionado.TT_ID_VEHICULO;
+                elhistorico.DESCRIPCION = "Desvincular vehiculo solicitud propietario";
+                elhistorico.IDRESOLUCION = idresolucion;
+
+                Boolean inshisto = clienteCuposTrans.crearHistoricoCuposTaxis(elhistorico);
+
+                if (inshisto == true)
+                {
+                    //MessageBox.Show("Registro de Histórico Exitoso");
+
+                    cuposTaxisTrans editacupo = new cuposTaxisTrans();
+                    editacupo = cuposeleccionado;
+                    editacupo.TT_ID_PERSONA = 0;
+                    editacupo.TT_ID_VEHICULO = 0;
+                    editacupo.TT_IDEMPRESA = 0;
+
+                    Boolean editacup = clienteCuposTrans.editarCuposTaxis(editacupo);
+
+                    if (editacup == true)
+                    {
+                        Object[] tmp;
+                        inventarioCuposTrans myInvent = new inventarioCuposTrans();
+
+                        myInvent.NROCUPO = cuposeleccionado.TT_NUMCUPO.ToString();
+                        myInvent.ID_TIPOVEHICULO = int.Parse(cuposeleccionado.TT_TIPOVEH);
+
+                        tmp = (Object[])clienteCuposTrans.getSInventarioCupos(myInvent);
+
+                        if (tmp != null && tmp.Length > 0)
+                        {
+                            myInvent = (inventarioCuposTrans)tmp[0];
+                            myInvent.DISPONIBLE = "T";
+
+                            if (clienteCuposTrans.editarCupos(myInvent))
+                            {
+                                detalleRangoCupoTrans detalleRango = new detalleRangoCupoTrans();
+                                detalleRango.IDDETALLERANGO = editacupo.t_IDDETALLERANGOCUPO;
+
+                                object[] listaDetalles = clienteCuposTrans.getDetalleRangoCupos(detalleRango);
+                                if (listaDetalles != null && listaDetalles.Length > 0)
+                                    detalleRango = (detalleRangoCupoTrans)listaDetalles[0];
+                                detalleRango.ASIGNADO = "F";
+
+                                bool editado = clienteCuposTrans.editarDetalleRangoCupos(detalleRango);
+
+                                if (editado)
+                                    funciones.mostrarMensaje("Desvinculación de vehículo de servicio público exitosa", "I");
+                                else
+                                    funciones.mostrarMensaje("Error desvinculando el vehículo", "E");
+                            }
+                        }
+
+                        funciones.mostrarMensaje("Cupo Modificado", "I");
+                    }
+                    else
+                    {
+                        funciones.mostrarMensaje("Error al Modificar Cupo", "E");
+                    }
+                }
+                else
+                {
+                    funciones.mostrarMensaje("Error al Registrar Histórico", "E");
+                }
+
+                funciones.mostrarMensaje("Registro de Resolución Exitoso", "I");
+
+                generarResolucion();
+
+                //this.Close();
+
+                limpiarCampos();
+            }
+            else
+            {
+                MessageBox.Show("Error al Insertar Resolución", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Close();
+            }
+        }
+
+        private void numeroresolucion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Funciones funciones = WS.Funciones();
+            funciones.esNumero(e);
+        }
+
+        /*private void generarResolucion()
+        {
+            plantilla myPlantilla = new plantilla();
+            myPlantilla.NOMBRE = "DESVINCULACION COMUN ACUERDO";
+            ServiciosDocumentosService MySerDoc = WS.ServiciosDocumentosService();
+            try
+            {
+                myPlantilla = (plantilla)((Object[])MySerDoc.buscarPlantillas(myPlantilla))[0];
+            }
+            catch (Exception e) 
+            {
+            }
+            if (myPlantilla != null)
+            {
+                String param;
+                Funciones myFnc = WS.Funciones();
+                plantillaAPDF myPlToPdf = new plantillaAPDF();
+                transferir myTrans = new transferir();
+                ServiciosDocumentosService mySerDoc = WS.ServiciosDocumentosService();
+                ServiciosAccesoriasService clienteAccesorias = WS.ServiciosAccesoriasService();
+
+
+                Object[] parametros = new Object[15];
+                param = "NUMRESOLUCION = " + numeroresolucion.Text;
+                parametros[0] = param;
+                param = "TIPOVEHICULO = " + tipovehiculo.SelectedValue.ToString();
+                parametros[1] = param;
+                param = "FECHARESOLUCION = " + fecharesolucion.Text;
+                parametros[2] = param;
+                param = "FECHASOLICITUD = " + fechasolicitud.Text;
+                parametros[3] = param;
+                param = "REPRESENTANTELEGAL = " + representantelegal.Text;
+                parametros[4] = param;
+                param = "EMPRESASERVICIO = " + cuposeleccionado.TT_ID_EMPSERVICIO;
+                parametros[5] = param;
+                param = "PROPIETARIOVEHICULO = " + cuposeleccionado.TT_ID_PERSONA + " " + cuposeleccionado.TT_ID_VEHICULO;
+                parametros[6] = param;
+                param = "TIPODOCUMENTO = PENDIENTE";
+                parametros[7] = param;
+                param = "IDENTIFICACIONPROPIETARIO = PENDIENTE";
+                parametros[8] = param;
+                param = "PLACAVEHICULO = PENDIENTE";
+                parametros[9] = param;
+                param = "NUMEROCUPO = " + cuposeleccionado.TT_NUMCUPO;
+                parametros[10] = param;
+                param = "MODELOVEHICULO = PENDIENTE";
+                parametros[11] = param;
+                param = "MARCAVEHICULO = PENDIENTE";
+                parametros[12] = param;
+                param = "MOTORVEHICULO = PENDIENTE";
+                parametros[13] = param;
+                param = "FECHAACTUAL = " + clienteAccesorias.getFechaActual();
+                parametros[14] = param;
+                try
+                {
+                    myPlantilla = mySerDoc.procesarPlantillaValores(myPlantilla, parametros);
+                    String nombreDoc = "RESOLUCIÓN DESVINCULACIÓN POR COMÚN ACUERDO " + numeroresolucion.Text;
+                    myPlToPdf.creaPdfPlantilla(myPlantilla, nombreDoc);
+                    myTrans.archivoAlServer(nombreDoc + ".pdf");
+                }
+                catch (Exception e) { }
+            }
+        }*/
+
+        private void generarResolucion()
+        {
+            try
+            {
+                object oMissing = System.Reflection.Missing.Value;
+                object oEndOfDoc = "\\endofdoc"; /* \endofdoc is a predefined bookmark */
+
+                //Start Word and create a new document.
+                Word._Application oWord;
+                Word._Document oDoc;
+                oWord = new Word.Application();
+                oWord.Visible = true;
+                oDoc = oWord.Documents.Add(ref oMissing, ref oMissing,
+                    ref oMissing, ref oMissing);
+
+                string nombreAlcaldia = "", nombreSecretaria = "", direccionSecretaria = "", webSecretaria = "", telefonosSecretaria = "";
+                string ciudadSecretaria = "", departamenteSecretaria = "", secretarioTransito = "", funcionarioTramite = "";
+
+                //Recuperar informacion de secretaria de transito
+                transito myTransito = new transito();
+                ServiciosTransitoService mySerTransito = WS.ServiciosTransitoService();
+                myTransito = mySerTransito.obtenerTransito();
+
+                if (myTransito != null && myTransito.ID_TRANSITO > 0)
+                {
+                    nombreAlcaldia = myTransito.NOMBREALCALDIA;
+                    nombreSecretaria = myTransito.DESCRIPCION;
+                    direccionSecretaria = myTransito.DIRECCION;
+                    telefonosSecretaria = myTransito.TELEFONOS + " - " + myTransito.FAX1;
+                    webSecretaria = myTransito.WEB;
+                    secretarioTransito = myTransito.SECRETARIOTRANSITO;
+                    funcionarioTramite = myTransito.FUNCIONARIOTRAMITES;
+                    ciudad myCiudad = new ciudad();
+                    myCiudad.ID_CIUDAD = myTransito.ID_CIUDAD;
+                    myCiudad = clienteAccesorias.getCiudadporID(myCiudad);
+                    ciudadSecretaria = myCiudad.NOMBRE;
+                    departamento myDepartamento = new departamento();
+                    myDepartamento.CODDPTO = myCiudad.ID_DEPTO;
+
+                    object[] listaDep = clienteAccesorias.getDepartamentos(myDepartamento);
+
+                    if (listaDep != null && listaDep.Length > 0)
+                    {
+                        myDepartamento = (departamento)listaDep[0];
+                        departamenteSecretaria = myDepartamento.NOMBRE;
+                    }
+                }
+
+                string nombreEmpresa = "";
+                string numeroTarjeta = "";
+
+                if (cuposeleccionado != null && cuposeleccionado.TT_IDCUPOTAXI > 0)
+                {
+                    empresasdeServicioTrans myEmpresa = new empresasdeServicioTrans();
+                    myEmpresa.ID_EMPSERVICIO = cuposeleccionado.TT_ID_EMPSERVICIO;
+                    ServiciosCuposTransService mySerCupo = WS.ServiciosCuposTransService();
+
+                    object[] listaEmp = mySerCupo.getEmpresaServicio(myEmpresa);
+
+                    if (listaEmp != null && listaEmp.Length > 0)
+                    {
+                        myEmpresa = (empresasdeServicioTrans)listaEmp[0];
+                        nombreEmpresa = myEmpresa.NOMBRE;
+                    }
+
+                    tarjetaOperacion myTarjeta = new tarjetaOperacion();
+                    myTarjeta.ID = cuposeleccionado.TT_IDTARJETA;
+                    ServiciosTramitesTransService mySerTramite = WS.ServiciosTramitesTransService();
+                    object[] listaTarjeta = mySerTramite.buscarTarjetaOperacion(myTarjeta);
+
+                    if (listaTarjeta != null && listaTarjeta.Length > 0)
+                    {
+                        myTarjeta = (tarjetaOperacion)listaTarjeta[0];
+                        numeroTarjeta = myTarjeta.NUMERO;
+                    }
+                }
+
+                //Insert a paragraph at the beginning of the document.
+
+                Word.Paragraph oPara1;
+                oPara1 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara1.Range.Text = nombreAlcaldia;
+                oPara1.Range.Font.Bold = 1;
+                oPara1.Range.Font.Size = 14;
+                oPara1.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                oPara1.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara2;
+                object oRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+                oPara2 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara2.Range.Text = nombreSecretaria;
+                oPara2.Range.Font.Bold = 1;
+                oPara2.Range.Font.Size = 12;
+                oPara2.Format.SpaceAfter = 24;    //24 pt spacing after paragraph.
+                oPara2.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                oPara2.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara3;
+                oPara3 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara3.Range.Text = "RESOLUCIÓN Nro. " + numeroresolucion.Text;
+                oPara3.Range.Font.Bold = 1;
+                oPara3.Range.Font.Size = 12;
+                oPara3.Format.SpaceAfter = 14;    //24 pt spacing after paragraph.
+                oPara3.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                oPara3.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara4;
+                oPara4 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara4.Range.Text = "Fecha " + fecharesolucion.Text;
+                oPara4.Range.Font.Bold = 1;
+                oPara4.Range.Font.Size = 12;
+                oPara4.Format.SpaceAfter = 14;    //24 pt spacing after paragraph.
+                oPara4.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                oPara4.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara5;
+                oPara5 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara5.Range.Text = "POR MEDIO DE LA CUAL SE AUTORIZA LA DESVINCULACIÓN DE EMPRESA A UN VEHÍCULO TIPO " + myTipoVehiculo;
+                oPara5.Range.Font.Bold = 1;
+                oPara5.Range.Font.Size = 12;
+                oPara5.Format.SpaceAfter = 14;    //24 pt spacing after paragraph.
+                oPara5.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                oPara5.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara6;
+                oPara6 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara6.Range.Text = "La " + nombreSecretaria + ", en uso de sus facultades legales en especial las que le confiere el Decreto 170 de 2001 Articulo 49, y demás afines y concordantes y";
+                oPara6.Range.Font.Bold = 0;
+                oPara6.Range.Font.Size = 12;
+                oPara6.Format.SpaceAfter = 14;    //24 pt spacing after paragraph.
+                oPara6.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                oPara6.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara7;
+                oPara7 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara7.Range.Text = "CONSIDERANDO";
+                oPara7.Range.Font.Bold = 1;
+                oPara7.Range.Font.Size = 12;
+                oPara7.Format.SpaceAfter = 14;    //24 pt spacing after paragraph.
+                oPara7.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                oPara7.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara8;
+                oPara8 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara8.Range.Text = "Que en la fecha " + fechasolicitud.Text + " el (la) señor (a) " + representantelegal.Text + " representante legal de la empresa " + nombreEmpresa + " y el (la) señor (a) " + nombrespropietario.Text + " " + primerapellido.Text + " " + segundoapellido.Text + ", con CEDULA No. " + identificacionpropietario.Text.Trim() + " como propietario, presentaron la solicitud de autorización para desvincular el vehículo " + myTipoVehiculo + " de placas " + placavehiculo.Text + ".";
+                oPara8.Range.Font.Bold = 0;
+                oPara8.Range.Font.Size = 12;
+                oPara8.Format.SpaceAfter = 14;    //24 pt spacing after paragraph.
+                oPara8.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                oPara8.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara9;
+                oPara9 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara9.Range.Text = "Se ha presentado a la Secretaría la solicitud de desvinculación por mutuo acuerdo del vehículo mencionado y la documentación establecida en el Decreto 170 del año dos mil uno (2001), artículo 49.- \" Cuando exista acuerdo para la desvinculación del vehículo de la empresa, el propietario o poseedor del vehículo, en forma conjunta, informarán por escrito a la autoridad competente y esta procederá a efectuar el trámite correspondiente, desvinculando el vehículo y cancelando la respectiva tarjeta de operación\".";
+                oPara9.Range.Font.Bold = 0;
+                oPara9.Range.Font.Size = 12;
+                oPara9.Format.SpaceAfter = 14;    //24 pt spacing after paragraph.
+                oPara9.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                oPara9.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara10;
+                oPara10 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara10.Range.Text = "Que revisada la documentación presentada ante este despacho se encontró en orden y acorde a lo estipulado en el artículo 49 del decreto 170 del año 2001.";
+                oPara10.Range.Font.Bold = 0;
+                oPara10.Range.Font.Size = 12;
+                oPara10.Format.SpaceAfter = 14;    //24 pt spacing after paragraph.
+                oPara10.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                oPara10.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara11;
+                oPara11 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara11.Range.Text = "Por lo anteriormente expuesto, es viable autorizar la desvinculación del vehículo mencionado de la empresa " + nombreEmpresa + ", ";
+                oPara11.Format.SpaceAfter = 14;
+                oPara11.Range.Bold = 0;
+                oPara11.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                oPara11.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara12;
+                oPara12 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara12.Range.Text = "Sin entrar en mayores consideraciones, la " + nombreSecretaria + ",";
+                oPara12.Format.SpaceAfter = 14;
+                oPara12.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                oPara12.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara13;
+                oPara13 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara13.Range.Text = "RESUELVE";
+                oPara13.Range.Font.Bold = 1;
+                oPara13.Range.Font.Size = 12;
+                oPara13.Format.SpaceAfter = 14;    //24 pt spacing after paragraph.
+                oPara13.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                oPara13.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara14;
+                oPara14 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara14.Range.Text = "ARTÍCULO PRIMERO: Autorizar la desvinculación de la empresa " + nombreEmpresa + " el vehículo de las siguientes características:";
+                oPara14.Format.SpaceAfter = 14;
+                oPara14.Range.Bold = 0;
+                oPara14.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                oPara14.Range.InsertParagraphAfter();
+
+                //Insert a 6 x 2 table, fill it with data, and make the first row
+                //bold and italic.
+                Word.Table oTable;
+                Word.Range wrdRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+                oTable = oDoc.Tables.Add(wrdRng, 6, 2, ref oMissing, ref oMissing);
+                oTable.Range.ParagraphFormat.SpaceAfter = 6;
+                oTable.Borders.Enable = 0;
+                oTable.Cell(1, 1).Range.Text = "NUMERO INTERNO:";
+                oTable.Cell(2, 1).Range.Text = "PLACAS:";
+                oTable.Cell(3, 1).Range.Text = "MODELO:";
+                oTable.Cell(4, 1).Range.Text = "MARCA:";
+                oTable.Cell(5, 1).Range.Text = "MOTOR:";
+                oTable.Cell(6, 1).Range.Text = "PROPIETARIO:";
+                //INFORMACION DE LA BASE
+                oTable.Cell(1, 2).Range.Text = "178";
+                oTable.Cell(2, 2).Range.Text = placavehiculo.Text;
+                oTable.Cell(3, 2).Range.Text = modelovehi;
+                oTable.Cell(4, 2).Range.Text = marcavehiculo.Text;
+                oTable.Cell(5, 2).Range.Text = numeromotor.Text;
+                oTable.Cell(6, 2).Range.Text = nombrespropietario.Text + " " + primerapellido.Text + " " + segundoapellido.Text;
+
+                oTable.Rows[1].Range.Font.Bold = 0;
+
+                //Add some text after the table.
+                Word.Paragraph oPara15;
+                oRng = oDoc.Bookmarks.get_Item(ref oEndOfDoc).Range;
+                oPara15 = oDoc.Content.Paragraphs.Add(ref oRng);
+                oPara15.Range.InsertParagraphBefore();
+                oPara15.Range.Bold = 0;
+                oPara15.Range.Text = "ARTÍCULO SEGUNDO: Cancelar la respectiva tarjeta de operación.";
+                oPara15.Format.SpaceAfter = 14;
+                oPara15.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                oPara15.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara16;
+                oPara16 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara16.Range.Text = "ARTÍCULO TERCERO: Contra el presente acto administrativo procede, el recurso de REPOSICIÓN para este despacho, y de APELACIÓN ante el señor ALCALDE DE " + ciudadSecretaria + ", dentro de los cinco (05) días siguientes a la notificación personal o por edicto.";
+                oPara16.Range.Font.Bold = 0;
+                oPara16.Range.Font.Size = 12;
+                oPara16.Format.SpaceAfter = 14;    //24 pt spacing after paragraph.
+                oPara16.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                oPara16.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara17;
+                oPara17 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara17.Range.Text = "NOTIFIQUESE Y CUMPLASE";
+                oPara17.Range.Font.Bold = 1;
+                oPara17.Range.Font.Size = 12;
+                oPara17.Format.SpaceAfter = 14;    //24 pt spacing after paragraph.
+                oPara17.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                oPara17.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara18;
+                oPara18 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara18.Range.Text = "Dada en " + ciudadSecretaria + " en la fecha " + clienteAccesorias.getFechaActualTexto() + ".";
+                oPara18.Range.Font.Bold = 0;
+                oPara18.Range.Font.Size = 12;
+                oPara18.Format.SpaceAfter = 34;    //24 pt spacing after paragraph.
+                oPara18.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                oPara18.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara19;
+                oPara19 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara19.Range.InsertParagraphBefore();
+                oPara19.Range.Text = secretarioTransito;
+                oPara19.Range.Font.Bold = 0;
+                oPara19.Range.Font.Size = 12;
+                oPara19.Format.SpaceAfter = 5;    //24 pt spacing after paragraph.
+                oPara19.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                oPara19.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara20;
+                oPara20 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara20.Range.Text = "Secretario de Tránsito y Transporte Municipal";
+                oPara20.Range.Font.Bold = 1;
+                oPara20.Range.Font.Size = 12;
+                oPara20.Format.SpaceAfter = 24;    //24 pt spacing after paragraph.
+                oPara20.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                oPara20.Range.InsertParagraphAfter();
+
+                Word.Paragraph oPara21;
+                oPara21 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara21.Range.Text = "Elaboro/" + funcionarioTramite;
+                oPara21.Range.Font.Bold = 0;
+                oPara21.Range.Font.Size = 12;
+                oPara21.Format.SpaceAfter = 24;    //24 pt spacing after paragraph.
+                oPara21.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphJustify;
+                oPara21.Range.InsertParagraphAfter();
+
+                //Insert a paragraph at the end of the document.
+                Word.Paragraph oPara22;
+                oPara22 = oDoc.Content.Paragraphs.Add(ref oMissing);
+                oPara22.Range.Text = direccionSecretaria + " Teléfonos " + telefonosSecretaria + " " + "<" + webSecretaria + ">" + " línea transparente: 018000913891 " + ciudadSecretaria + "-" + departamenteSecretaria;
+                oPara22.Format.SpaceAfter = 6;
+                oPara22.Range.Bold = 1;
+                oPara22.Alignment = Microsoft.Office.Interop.Word.WdParagraphAlignment.wdAlignParagraphCenter;
+                oPara22.Range.InsertParagraphAfter();
+            }
+            catch (Exception exp)
+            {
+                funciones.mostrarMensaje("Hubo un error al generar el documento", "E");
+            }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            limpiarCampos();
+
+            if (rdNumeroCupo.Checked)
+            {
+                if (!txtNumeroCupo.Text.Equals(""))
+                {
+                    buscarCupoNumero();
+
+                    if (cuposeleccionado != null && cuposeleccionado.TT_IDCUPOTAXI > 0)
+                    {
+                        llenarCamposVehiculo(cuposeleccionado.TT_ID_VEHICULO);
+                        buscarPropietarios(cuposeleccionado.TT_ID_VEHICULO);
+                        numeroresolucion.Focus();
+                    }
+                }
+                else
+                {
+                    funciones.mostrarMensaje("El campo número de cupo no puede ser vacio", "W");
+                }
+            }
+            else
+            {
+                if (!txtPlaca.Text.Equals(""))
+                {
+                    vehiculo myVehiculo = new vehiculo();
+                    myVehiculo.PLACA = txtPlaca.Text;
+
+                    ServiciosVehiculosService mySerVehi = WS.ServiciosVehiculosService();
+                    myVehiculo = mySerVehi.getVehiculo(myVehiculo);
+
+                    if (myVehiculo != null && myVehiculo.ID_VEHICULO > 0)
+                    {
+                        buscarCupoVehiculo(myVehiculo.ID_VEHICULO);
+
+                        if (cuposeleccionado != null && cuposeleccionado.TT_IDCUPOTAXI > 0)
+                        {
+                            llenarCamposVehiculo(cuposeleccionado.TT_ID_VEHICULO);
+                            buscarPropietarios(cuposeleccionado.TT_ID_VEHICULO);
+                            numeroresolucion.Focus();
+                        }
+                    }
+                    else
+                    {
+                        funciones.mostrarMensaje("Vehiculo no encontrado", "W");
+                    }
+                }
+                else
+                {
+                    funciones.mostrarMensaje("El campo placa no puede ser vacio", "W");
+                }
+            }
+        }
+
+        void buscarCupoVehiculo(int idVehiculo)
+        {
+            cuposTaxisTrans elcupos = new cuposTaxisTrans();
+            elcupos.TT_ID_VEHICULO = idVehiculo;
+            listacuposs = (Object[])clienteCuposTrans.getSCupos(elcupos);
+
+            if (listacuposs != null && listacuposs.Length >= 0)
+            {
+                cuposeleccionado = (cuposTaxisTrans)listacuposs[0];
+                btnSave.Enabled = true;
+                informacionderegistro.Enabled = true;
+                tipoVehiculoTrans myVehiculoTrans = new tipoVehiculoTrans();
+                myVehiculoTrans.ID = int.Parse(cuposeleccionado.TT_TIPOVEH);
+
+                object[] listaTipo = clienteCuposTrans.buscarTipoVehiculoTrans(myVehiculoTrans);
+
+                if (listaTipo != null && listaTipo.Length > 0)
+                {
+                    myVehiculoTrans = (tipoVehiculoTrans)listaTipo[0];
+                    myTipoVehiculo = myVehiculoTrans.NOMBRE;
+                }
+            }
+            else
+            {
+                btnSave.Enabled = false;
+                informacionderegistro.Enabled = false;
+                funciones.mostrarMensaje("No se encontraron coincidencias con ese número de placa", "W");
+            }
+        }
+
+        void buscarCupoNumero()
+        {
+            cuposTaxisTrans elcupos = new cuposTaxisTrans();
+            elcupos.TT_TIPOVEH = tipovehiculo.SelectedValue.ToString();
+            elcupos.TT_NUMCUPO = int.Parse(txtNumeroCupo.Text);
+            listacuposs = (Object[])clienteCuposTrans.getSCupos(elcupos);
+
+            if (listacuposs != null && listacuposs.Length >= 0)
+            {
+                cuposeleccionado = (cuposTaxisTrans)listacuposs[0];
+                btnSave.Enabled = true;
+                informacionderegistro.Enabled = true;
+                tipoVehiculoTrans myVehiculoTrans = new tipoVehiculoTrans();
+                myVehiculoTrans.ID = int.Parse(cuposeleccionado.TT_TIPOVEH);
+
+                object[] listaTipo = clienteCuposTrans.buscarTipoVehiculoTrans(myVehiculoTrans);
+
+                if (listaTipo != null && listaTipo.Length > 0)
+                {
+                    myVehiculoTrans = (tipoVehiculoTrans)listaTipo[0];
+                    myTipoVehiculo = myVehiculoTrans.NOMBRE;
+                }
+            }
+            else
+            {
+                btnSave.Enabled = false;
+                informacionderegistro.Enabled = false;
+                funciones.mostrarMensaje("No se encontraron coincidencias con ese número de cupo", "W");
+            }
+        }
+
+        private void llenarCamposVehiculo(int idVehiculo)
+        {
+            if (idVehiculo > 0)
+            {
+                vehiculo myVehi = new vehiculo();
+                myVehi.ID_VEHICULO = idVehiculo;
+                ServiciosVehiculosService mySerVehi = WS.ServiciosVehiculosService();
+                myVehi = mySerVehi.getVehiculo(myVehi);
+
+                if (myVehi != null && myVehi.ID_VEHICULO > 0)
+                {
+                    contenedorvehiculo.Enabled = true;
+                    viewVehiculo myViewVehiculo = new viewVehiculo();
+
+                    myViewVehiculo.PLACA = myVehi.PLACA;
+                    ServiciosViewVehiculoService mySerViewVehi = WS.ServiciosViewVehiculoService();
+
+                    object[] listVehiculo = mySerViewVehi.getSViewVehiculo(myViewVehiculo);
+
+                    if (listVehiculo != null && listVehiculo.Length > 0)
+                    {
+                        myViewVehiculo = (viewVehiculo)listVehiculo[0];
+                        marcavehiculo.Text = myViewVehiculo.MARCAVEH;
+                        lineavehiculo.Text = myViewVehiculo.LINEAVEH;
+                        clasevehiculo.Text = myViewVehiculo.CLASEVEH;
+                        numerochasis.Text = myViewVehiculo.NUMEROCHASIS;
+                        tipocarroseria.Text = myViewVehiculo.TIPOCARROCERIA;
+                        numeromotor.Text = myViewVehiculo.NUMEROMOTOR;
+                        modelovehi = myViewVehiculo.MODELO;
+                        placavehiculo.Text = myViewVehiculo.PLACA;
+                    }
+
+                    ServiciosPropietariosService mySerProp = WS.ServiciosPropietariosService();
+                    propietarioDeVehiculo myPropietariosVehi = new propietarioDeVehiculo();
+                    myPropietariosVehi.ID_VEHICULO = myVehi.ID_VEHICULO;
+                    myPropietariosVehi.PROPIETARIOACTUAL = "T";
+
+                    object[] listaProp = mySerProp.getPropietariosDeVehiculos(myPropietariosVehi);
+
+                    if (listaProp != null && listaProp.Length > 0)
+                    {
+                        contenedorpropietarios.Enabled = true;
+                        if (listaProp.Length > 0)
+                        {
+                            btnprimero.Enabled = true;
+                            btnanterior.Enabled = true;
+                            btnsiguiente.Enabled = true;
+                            btnultimo.Enabled = true;
+                        }
+                        else
+                        {
+                            btnprimero.Enabled = false;
+                            btnanterior.Enabled = false;
+                            btnsiguiente.Enabled = false;
+                            btnultimo.Enabled = false;
+                        }
+
+                        cargarPropietario(listaProp, 0);
+                    }
+                }
+            }
+        }
+
+        private void buscarPropietarios(int idVehiculo)
+        {
+            ServiciosPropietariosService mySerProp = WS.ServiciosPropietariosService();
+            propietarioDeVehiculo propietariosss = new propietarioDeVehiculo();
+            propietariosss.ID_VEHICULO = idVehiculo;
+            propietariosss.PROPIETARIOACTUAL = "T";
+
+            listapropietariosaaa = (Object[])mySerProp.getPropietariosDeVehiculos(propietariosss);
+
+            if (listapropietariosaaa != null && listapropietariosaaa.Length > 0)
+            {
+                btnSave.Enabled = true;
+                if (listapropietariosaaa.Length > 0)
+                {
+                    btnprimero.Enabled = true;
+                    btnanterior.Enabled = true;
+                    btnsiguiente.Enabled = true;
+                    btnultimo.Enabled = true;
+                }
+                else
+                {
+                    btnprimero.Enabled = false;
+                    btnanterior.Enabled = false;
+                    btnsiguiente.Enabled = false;
+                    btnultimo.Enabled = false;
+                }
+                cargarPropietario(listapropietariosaaa, 0);
+            }
+            else
+            {
+                btnSave.Enabled = false;
+                funciones.mostrarMensaje("No se encontraron propietarios", "I");
+            }
+        }
+
+        private void cargarPropietario(Object[] listadopropietarios, int npropietario)
+        {
+            propietarioDeVehiculo elpropietario = new propietarioDeVehiculo();
+            elpropietario = (propietarioDeVehiculo)listadopropietarios[npropietario];
+
+            if (elpropietario.EMPPER != "" && elpropietario.EMPPER == "PER")
+            {
+                quees = 1;
+                idp = elpropietario.ID_PROPIETARIO;
+                cargarPersona(elpropietario.ID_PROPIETARIO);
+                contenedorpersona.Visible = true;
+                contenedorempresa.Visible = false;
+            }
+            else if (elpropietario.EMPPER != "" && elpropietario.EMPPER == "EMP")
+            {
+                quees = 2;
+                idp = elpropietario.ID_PROPIETARIO;
+                cargarEmpresa(elpropietario.ID_PROPIETARIO);
+                contenedorpersona.Visible = false;
+                contenedorempresa.Visible = true;
+            }
+        }
+
+        private void cargarPersona(int idperson)
+        {
+            ServiciosPersonasService mySerPer = WS.ServiciosPersonasService();
+            Funciones funciones = WS.Funciones();
+            Object[] listad = (Object[])clienteAccesorias.getDocumentos();
+
+            if (listad != null)
+            {
+                clasedocumento.DataSource = null;
+                clasedocumento.DisplayMember = "DESCRIPCION";
+                clasedocumento.ValueMember = "ID_DOCTO";
+                funciones.llenarCombo(clasedocumento, listad);
+            }
+
+            persona person = new persona();
+            persona lapersona = new persona();
+            person.ID_PERSONAS = idperson;
+            lapersona = mySerPer.getPersona(person);
+
+            clasedocumento.SelectedValue = lapersona.ID_DOCTO;
+            identificacionpropietario.Text = lapersona.IDENTIFICACION;
+            nombrespropietario.Text = lapersona.NOMBRES;
+            primerapellido.Text = lapersona.APELLIDO1;
+            segundoapellido.Text = lapersona.APELLIDO2;
+            direccionpropietario.Text = lapersona.DIRECCION;
+            telefonopropietario.Text = lapersona.TELEFONO;
+
+            if (lapersona.ID_MUNICIPIO != "" && lapersona.ID_MUNICIPIO != null)
+            {
+                ciudad ciuda = new ciudad();
+                ciudad laciudad = new ciudad();
+                ciuda.ID_CIUDAD = Int32.Parse(lapersona.ID_MUNICIPIO);
+                laciudad = clienteAccesorias.getCiudadporID(ciuda);
+                if (laciudad != null)
+                {
+                    codigociudad.Text = laciudad.CODCIUDAD;
+                    nombreciudad.Text = laciudad.NOMBRE;
+                }
+            }
+        }
+
+        private void cargarEmpresa(int idempres)
+        {
+            ServiciosEmpresasService mySerEmp = WS.ServiciosEmpresasService();
+            empresa empres = new empresa();
+            empresa laempresa = new empresa();
+            empres.ID_EMPRESA = idempres;
+
+            Object[] lempres = (Object[])mySerEmp.getEmpresa(empres);
+
+            if (lempres != null && lempres.Length >= 0)
+            {
+                laempresa = (empresa)lempres[0];
+                identificacionpropietario.Text = laempresa.NIT;
+                nombrespropietario.Text = laempresa.RAZONSOCIAL;
+            }
+        }
+
+        private void btnprimero_Click(object sender, EventArgs e)
+        {
+            if (listapropietariosaaa != null)
+            {
+                cargarPropietario(listapropietariosaaa, 0);
+            }
+        }
+
+        private void btnultimo_Click(object sender, EventArgs e)
+        {
+            if (listapropietariosaaa != null)
+            {
+                int fin = listapropietariosaaa.Length - 1;
+                cargarPropietario(listapropietariosaaa, fin);
+            }
+        }
+
+        private void btnsiguiente_Click(object sender, EventArgs e)
+        {
+            if (listapropietariosaaa != null)
+            {
+                if (numpropietario < listapropietariosaaa.Length - 1)
+                {
+                    numpropietario = numpropietario + 1;
+                    cargarPropietario(listapropietariosaaa, numpropietario);
+                }
+            }
+        }
+
+        private void btnanterior_Click(object sender, EventArgs e)
+        {
+            if (listapropietariosaaa != null)
+            {
+                if (numpropietario > 0)
+                {
+                    numpropietario = numpropietario - 1;
+                    cargarPropietario(listapropietariosaaa, numpropietario);
+                }
+            }
+        }
+
+        private void txtNumeroCupo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Funciones myFun = WS.Funciones();
+            myFun.esNumero(e);
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                if (!txtNumeroCupo.Text.Equals(""))
+                {
+                    buscarCupoNumero();
+                    if (cuposeleccionado != null && cuposeleccionado.TT_IDCUPOTAXI > 0)
+                    {
+                        llenarCamposVehiculo(cuposeleccionado.TT_ID_VEHICULO);
+                        buscarPropietarios(cuposeleccionado.TT_ID_VEHICULO);
+                    }
+                }
+                else
+                {
+                    funciones.mostrarMensaje("El campo número de cupo no puede ser vacio", "W");
+                }
+            }
+        }
+
+        private void txtPlaca_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Funciones myFun = WS.Funciones();
+            myFun.esAlfanumerico(e);
+
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                if (!txtPlaca.Text.Equals(""))
+                {
+                    vehiculo myVehiculo = new vehiculo();
+                    myVehiculo.PLACA = txtPlaca.Text;
+                    ServiciosVehiculosService mySerVehi = WS.ServiciosVehiculosService();
+
+                    myVehiculo = mySerVehi.getVehiculo(myVehiculo);
+                    if (myVehiculo != null && myVehiculo.ID_VEHICULO > 0)
+                    {
+                        buscarCupoVehiculo(myVehiculo.ID_VEHICULO);
+                        if (cuposeleccionado != null && cuposeleccionado.TT_IDCUPOTAXI > 0)
+                        {
+                            llenarCamposVehiculo(cuposeleccionado.TT_ID_VEHICULO);
+                            buscarPropietarios(cuposeleccionado.TT_ID_VEHICULO);
+                        }
+                    }
+                    else
+                    {
+                        funciones.mostrarMensaje("Vehículo no encontrado", "W");
+                    }
+                }
+                else
+                {
+                    funciones.mostrarMensaje("El campo placa no puede ser vacío", "W");
+                }
+            }
+        }
+
+        private void limpiarCampos()
+        {
+            btnprimero.Enabled = false;
+            btnanterior.Enabled = false;
+            btnsiguiente.Enabled = false;
+            btnultimo.Enabled = false;
+            listapropietariosaaa = null;
+            placavehiculo.Text = "";
+            marcavehiculo.Text = "";
+            lineavehiculo.Text = "";
+            clasevehiculo.Text = "";
+            numerochasis.Text = "";
+            tipocarroseria.Text = "";
+            numeromotor.Text = "";
+            //POPIETARIO
+            clasedocumento.DataSource = null;
+            clasedocumento.DisplayMember = "DESCRIPCION";
+            clasedocumento.ValueMember = "ID_DOCTO";
+            identificacionpropietario.Text = "";
+            nombrespropietario.Text = "";
+            primerapellido.Text = "";
+            segundoapellido.Text = "";
+            direccionpropietario.Text = "";
+            telefonopropietario.Text = "";
+            codigociudad.Text = "";
+            nombreciudad.Text = "";
+            cuposeleccionado = new cuposTaxisTrans();
+            informacionderegistro.Enabled = false;
+        }
+
+        private void rdNumeroCupo_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdNumeroCupo.Checked)
+            {
+                txtNumeroCupo.Enabled = true;
+                txtPlaca.Enabled = false;
+                tipovehiculo.Enabled = true;
+            }
+            else
+            {
+                txtNumeroCupo.Enabled = false;
+                txtPlaca.Enabled = true;
+                tipovehiculo.Enabled = false;
+            }
+        }
+
+        private void rdPlaca_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdPlaca.Checked)
+            {
+                txtPlaca.Enabled = true;
+                txtNumeroCupo.Enabled = false;
+                tipovehiculo.Enabled = false;
+            }
+            else
+            {
+                txtPlaca.Enabled = false;
+                txtNumeroCupo.Enabled = true;
+                tipovehiculo.Enabled = true;
+            }
+        }
+
+    }
+}

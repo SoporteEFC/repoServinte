@@ -1,0 +1,30 @@
+<12/11/2013 04:14:08 p.m.--#> Inicia aplicacion <#--12/11/2013 04:14:08 p.m.>
+
+<12/11/2013 04:14:47 p.m.--#> Ingreso como usuario ID: 215 <#--12/11/2013 04:14:47 p.m.>
+
+<12/11/2013 04:15:01 p.m.--#> Error: System.Net.WebException: Error de la solicitud con el código de estado HTTP 404: Not Found.
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   en LibreriasSintrat.wsServiciosAccesorias.ServiciosAccesoriasService.listarRuntradioaccion() en D:\Desarrollo\Repositorio\TransitoCsharp\LibreriasSintrat\LibreriasSintrat\LibreriasSintrat\Web References\wsServiciosAccesorias\Reference.cs:línea 476
+   en TransportePublico.servicios.tramites.tarjetadeoperacion.getRadioAccion() en D:\Desarrollo\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\servicios\tramites\tarjetadeoperacion.cs:línea 597
+   en TransportePublico.servicios.tramites.tarjetadeoperacion..ctor() en D:\Desarrollo\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\servicios\tramites\tarjetadeoperacion.cs:línea 60
+   en TransportePublico.FPrincipal.tarjetaDeOperaciónToolStripMenuItem_Click(Object sender, EventArgs e) en D:\Desarrollo\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\Principal.cs:línea 366 -||- Ubicacion error:TransportePublico.FPrincipal <#--12/11/2013 04:15:01 p.m.>
+
+<12/11/2013 04:15:06 p.m.--#> Error: System.Net.WebException: Error de la solicitud con el código de estado HTTP 404: Not Found.
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   en LibreriasSintrat.wsServiciosAccesorias.ServiciosAccesoriasService.listarRuntradioaccion() en D:\Desarrollo\Repositorio\TransitoCsharp\LibreriasSintrat\LibreriasSintrat\LibreriasSintrat\Web References\wsServiciosAccesorias\Reference.cs:línea 476
+   en TransportePublico.servicios.tramites.tarjetadeoperacion.getRadioAccion() en D:\Desarrollo\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\servicios\tramites\tarjetadeoperacion.cs:línea 597
+   en TransportePublico.servicios.tramites.tarjetadeoperacion..ctor() en D:\Desarrollo\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\servicios\tramites\tarjetadeoperacion.cs:línea 60
+   en TransportePublico.FPrincipal.tarjetaDeOperaciónToolStripMenuItem_Click(Object sender, EventArgs e) en D:\Desarrollo\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\Principal.cs:línea 366 -||- Ubicacion error:TransportePublico.FPrincipal <#--12/11/2013 04:15:06 p.m.>
+
+<12/11/2013 04:15:18 p.m.--#> Error: System.Net.WebException: Error de la solicitud con el código de estado HTTP 404: Not Found.
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   en LibreriasSintrat.wsServiciosAccesorias.ServiciosAccesoriasService.listarRuntradioaccion() en D:\Desarrollo\Repositorio\TransitoCsharp\LibreriasSintrat\LibreriasSintrat\LibreriasSintrat\Web References\wsServiciosAccesorias\Reference.cs:línea 476
+   en TransportePublico.servicios.tramites.tarjetadeoperacion.getRadioAccion() en D:\Desarrollo\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\servicios\tramites\tarjetadeoperacion.cs:línea 597
+   en TransportePublico.servicios.tramites.tarjetadeoperacion..ctor() en D:\Desarrollo\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\servicios\tramites\tarjetadeoperacion.cs:línea 60
+   en TransportePublico.FPrincipal.tarjetaDeOperaciónToolStripMenuItem_Click(Object sender, EventArgs e) en D:\Desarrollo\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\Principal.cs:línea 366 -||- Ubicacion error:TransportePublico.FPrincipal <#--12/11/2013 04:15:18 p.m.>
+
+<12/11/2013 04:15:20 p.m.--#> Cierre de aplicación <#--12/11/2013 04:15:20 p.m.>
+

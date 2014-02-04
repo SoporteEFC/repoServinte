@@ -1,0 +1,1002 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using LibreriasSintrat.ServiciosCuposTrans;
+using LibreriasSintrat.ServiciosVehiculos;
+using LibreriasSintrat.ServiciosViewVehiculo;
+using LibreriasSintrat.ServiciosMedidasCautelares;
+using LibreriasSintrat.ServiciosPropietarios;
+using LibreriasSintrat.ServiciosPersonas;
+using LibreriasSintrat.ServiciosAccesorias;
+using LibreriasSintrat.ServiciosEmpresas;
+using TransportePublico;
+using LibreriasSintrat.utilidades;
+using TransitoPrincipal;
+
+namespace TransportePublico.servicios.cupos
+{
+    public partial class editarcupo : Form
+    {
+        ServiciosCuposTransService clienteCuposTrans;
+        ServiciosVehiculosService clienteVehiculos;
+        ServiciosViewVehiculoService clienteViewVehiculos;
+        ServiciosMedidasCautelaresService clienteCautelares;
+        ServiciosPropietariosService clientePropietarios;
+        ServiciosPersonasService clientePersonas;
+        ServiciosAccesoriasService clienteAccesorias;
+        ServiciosEmpresasService clienteEmpresas;
+        ServiciosCuposTransService mySerCuposTrans;
+
+        viewCupos vistaseleccionada = new viewCupos();
+        Object[] listacupos = null;
+        Object[] listapropietariosaaa;
+        empresasdeServicioTrans newempresa;
+        vehiculo vehiculoAsociado = new vehiculo();
+        Log log = new Log();
+
+        Funciones funciones;
+
+        int numpropietario = 0, quees = 0, idp = 0;
+        //bool inicial = false;
+
+        bool editable = false;
+
+        public editarcupo()
+        {
+            InitializeComponent();
+            log = new Log();
+        }
+
+        private void editarcupo_Load(object sender, EventArgs e)
+        {
+            contenedorvehiculo.Enabled = false;
+            contenedorpropietarios.Enabled = false;
+            btnSave.Enabled = false;
+            btnprimero.Enabled = false;
+            btnanterior.Enabled = false;
+            btnsiguiente.Enabled = false;
+            btnultimo.Enabled = false;
+            tipoVehiculoTrans tipo = new tipoVehiculoTrans();
+            clienteCuposTrans = WS.ServiciosCuposTransService();
+            clienteViewVehiculos = WS.ServiciosViewVehiculoService();
+            clienteVehiculos = WS.ServiciosVehiculosService();
+            clienteCautelares = WS.ServiciosMedidasCautelaresService();
+            clientePropietarios = WS.ServiciosPropietariosService();
+            clienteAccesorias = WS.ServiciosAccesoriasService();
+            clientePersonas = WS.ServiciosPersonasService();
+            clienteEmpresas = WS.ServiciosEmpresasService();
+            mySerCuposTrans = WS.ServiciosCuposTransService();
+
+            funciones = WS.Funciones();
+
+            Object[] listat = (Object[])clienteCuposTrans.getTipoVehiculoTrans(tipo);
+
+            if (listat != null)
+            {
+                cmbTipoVehiculo.DataSource = null;
+                cmbTipoVehiculo.DisplayMember = "NOMBRE";
+                cmbTipoVehiculo.ValueMember = "ID";
+                funciones.llenarCombo(cmbTipoVehiculo, listat);
+            }
+
+            rdBuscarNumero.Checked = true;
+            contenedordatoscupo.Enabled = false;
+        }
+
+        private void btnbuscarempresa_Click(object sender, EventArgs e)
+        {
+            buscarEmpresa();
+        }
+
+        public void buscarEmpresa()
+        {
+            empresasdeServicioTrans empresa = new empresasdeServicioTrans();
+            newempresa = new empresasdeServicioTrans();
+            Funciones funciones = WS.Funciones();
+            ArrayList Campos = new ArrayList();
+
+            Campos.Add("NIT = NIT");
+            Campos.Add("NOMBRE = NOMBRE");
+
+            Object[] Empresas = (Object[])clienteCuposTrans.getTEmpresasServicio(empresa);
+            buscador buscador = new buscador(Empresas, Campos, "Empresas", null);
+
+            if (buscador.ShowDialog() == DialogResult.OK)
+            {
+                newempresa = (empresasdeServicioTrans)funciones.listToEmpresaServicio(buscador.Seleccion);
+                siglaempresa.Text = newempresa.NIT;
+                nombreempresa.Text = newempresa.NOMBRE;
+            }
+        }
+
+        private void tipovehiculo_SelectedValueChanged(object sender, EventArgs e)
+        {
+            verificarCupos();
+        }
+
+        private void verificarCupos()
+        {
+            if (siglaempresa.Text != "" || nombreempresa.Text != "")
+            {
+                //inicial = true;
+
+                detalleRangoCupoTrans cuposdisp = new detalleRangoCupoTrans();
+                Funciones funciones = WS.Funciones();
+
+                if (newempresa != null)
+                {
+                    if (cmbTipoVehiculo.SelectedIndex >= 0)
+                    {
+                        viewCupos vistacupos = new viewCupos();
+                        vistacupos.EMPRESAS = newempresa.NOMBRE;
+                        vistacupos.TIPOVEHI = cmbTipoVehiculo.Text;
+
+                        if (numcupo.Text != "")
+                        {
+                            vistacupos.NUMERO = Int32.Parse(numcupo.Text);
+                        }
+
+                        listacupos = clienteCuposTrans.getSViewCupos(vistacupos);
+
+                        if (listacupos != null && listacupos.Length >= 0)
+                        {
+                            contenedorvehiculo.Enabled = true;
+                            contenedorpropietarios.Enabled = true;
+                            btnSave.Enabled = true;
+                            btnprimero.Enabled = true;
+                            btnanterior.Enabled = true;
+                            btnsiguiente.Enabled = true;
+                            btnultimo.Enabled = true;
+
+                            mostrarCupos(listacupos);
+                        }
+                        else
+                        {
+                            contenedorvehiculo.Enabled = false;
+                            contenedorpropietarios.Enabled = false;
+                            btnSave.Enabled = false;
+                            btnprimero.Enabled = false;
+                            btnanterior.Enabled = false;
+                            btnsiguiente.Enabled = false;
+                            btnultimo.Enabled = false;
+                            MessageBox.Show("No se encontraron cupos");
+                            grillacupos.DataSource = null;
+                            limpiarCampos();
+                        }
+                    }
+                }
+                else
+                {
+                    buscarEmpresa();
+                }
+
+                //inicial = false;
+            }
+        }
+
+        private void mostrarCupos(Object[] lista)
+        {
+            Funciones funciones = WS.Funciones();
+            DataTable dt = new DataTable();
+            ArrayList Campos = new ArrayList();
+
+            Campos.Add("NUMERO = NUMERO CUPO");
+            Campos.Add("EMPRESAS = EMPRESA DE SERVICIO");
+            Campos.Add("TIPOVEHI = TIPO DE VEHICULO");
+            Campos.Add("PLACA = PLACA");
+            Campos.Add("NOMBRE = PERSONA PROPIETARIA");
+            Campos.Add("RAZONSOCIAL = EMPRESA PROPIETARIA");
+
+            try
+            {
+                dt = funciones.ToDataTable(funciones.ObjectToArrayList(lista));
+            }
+            catch (Exception e)
+            {
+                log.escribirError(e.ToString(), this.GetType());
+            }
+
+            grillacupos.DataSource = dt;
+
+            if (dt.Rows.Count > 0)
+            {
+                funciones.configurarGrilla(grillacupos, Campos);
+            }
+
+            dt = null;
+            Campos = null;
+
+            grillacupos.Select();
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Funciones funciones = WS.Funciones();
+            funciones.esNumero(e);
+            funciones.lanzarTapConEnter(e);
+        }
+
+        private void btnSearchCupo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        public void buscarCupos()
+        {
+            if (listacupos != null)
+            {
+                //cupo
+                //buscador search = new buscador(listacupos,);
+            }
+            else
+                MessageBox.Show("No existen cupos disponibles.");
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnbuscarvehiculo_Click(object sender, EventArgs e)
+        {
+            if (placavehiculo.Text == "")
+            {
+                MessageBox.Show("Debe ingresar el número de Placa del Vehículo", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                placavehiculo.Focus();
+            }
+            else
+            {
+                buscarPendientes();
+            }
+        }
+
+        private void buscarPendientes()
+        {
+            vehiculo vehicul = new vehiculo();
+            jPendiente pendiente = new jPendiente();
+
+            vehicul.PLACA = placavehiculo.Text;
+            vehiculoAsociado = clienteVehiculos.getVehiculo(vehicul);
+            pendiente.JP_V_ID = vehiculoAsociado.ID_VEHICULO;
+            pendiente.JP_ACTIVO = 1;
+
+            Object[] listapendientes = clienteCautelares.ListarMedidasCautelares(pendiente);
+
+            if (listapendientes != null && listapendientes.Length >= 0)
+            {
+                MessageBox.Show("El vehiculo tiene Pendiente Judiciales Activos", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                buscarVehiculo();
+            }
+        }
+
+        private void grillacupos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (grillacupos.CurrentRow != null && listacupos != null)
+            {
+                vistaseleccionada = (viewCupos)listacupos[grillacupos.CurrentRow.Index];
+
+                buscarVehiculo();
+            }
+            else
+            {
+                grillacupos.DataSource = null;
+                limpiarCampos();
+            }
+        }
+
+        public void buscarVehiculo()
+        {
+            //placavehiculo.Text = "";
+
+            //if(inicial)
+            if(!editable)
+                placavehiculo.Text = vistaseleccionada.PLACA;
+
+            viewVehiculo vehiculobusca = new viewVehiculo();
+            viewVehiculo encontrado;
+
+            vehiculobusca.PLACA = placavehiculo.Text;
+            encontrado = clienteViewVehiculos.consultarInformacionVehiculoPorPlaca(vehiculobusca);
+
+            if (encontrado != null && encontrado.IDVEHICULO > 0)
+            {
+                if ((encontrado.CLASEVEH == "AUTOMOVIL" && cmbTipoVehiculo.Text == "TAXI") || (encontrado.CLASEVEH == cmbTipoVehiculo.Text))
+                {
+                    marcavehiculo.Text = encontrado.MARCAVEH;
+                    lineavehiculo.Text = encontrado.LINEAVEH;
+                    clasevehiculo.Text = encontrado.CLASEVEH;
+                    numerochasis.Text = encontrado.NUMEROCHASIS;
+                    tipocarroseria.Text = encontrado.TIPOCARROCERIA;
+                    numeromotor.Text = encontrado.NUMEROMOTOR;
+                    buscarPropietarios();
+
+                    editable = true;
+
+                    btnSave.Enabled = true;
+                }
+                else
+                {
+                    editable = false;
+
+                    btnSave.Enabled = false;
+                    MessageBox.Show("El vehiculo no se ajusta a las caracteristicas del cupo");
+                }
+            }
+            else
+            {
+                editable = false;
+
+                btnSave.Enabled = true;
+
+                MessageBox.Show("No se encontraron datos del Vehículo ", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void buscarPropietarios()
+        {
+            propietarioDeVehiculo propietariosss = new propietarioDeVehiculo();
+            propietariosss.ID_VEHICULO = vehiculoAsociado.ID_VEHICULO;
+            propietariosss.PROPIETARIOACTUAL = "T";
+            listapropietariosaaa = (Object[])clientePropietarios.getPropietariosDeVehiculos(propietariosss);
+            if (listapropietariosaaa != null && listapropietariosaaa.Length > 0)
+            {
+                btnSave.Enabled = true;
+                if (listapropietariosaaa.Length > 0)
+                {
+                    btnprimero.Enabled = true;
+                    btnanterior.Enabled = true;
+                    btnsiguiente.Enabled = true;
+                    btnultimo.Enabled = true;
+                }
+                else
+                {
+                    btnprimero.Enabled = false;
+                    btnanterior.Enabled = false;
+                    btnsiguiente.Enabled = false;
+                    btnultimo.Enabled = false;
+                }
+                cargarPropietario(listapropietariosaaa, 0);
+            }
+            else
+            {
+                btnSave.Enabled = false;
+                MessageBox.Show("No se encontraron propietarios", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void cargarPropietario(Object[] listadopropietarios, int npropietario)
+        {
+            propietarioDeVehiculo elpropietario = new propietarioDeVehiculo();
+            elpropietario = (propietarioDeVehiculo)listadopropietarios[npropietario];
+            if (elpropietario.EMPPER != "" && elpropietario.EMPPER == "PER")
+            {
+                quees = 1;
+                idp = elpropietario.ID_PROPIETARIO;
+                cargarPersona(elpropietario.ID_PROPIETARIO);
+                contenedorpersona.Visible = true;
+                contenedorempresa.Visible = false;
+            }
+            else if (elpropietario.EMPPER != "" && elpropietario.EMPPER == "EMP")
+            {
+                quees = 2;
+                idp = elpropietario.ID_PROPIETARIO;
+                cargarEmpresa(elpropietario.ID_PROPIETARIO);
+                contenedorpersona.Visible = false;
+                contenedorempresa.Visible = true;
+            }
+        }
+
+        private void cargarPersona(int idperson)
+        {
+
+            Funciones funciones = WS.Funciones();
+            Object[] listad = (Object[])clienteAccesorias.getDocumentos();
+            if (listad != null)
+            {
+                clasedocumento.DataSource = null;
+                clasedocumento.DisplayMember = "DESCRIPCION";
+                clasedocumento.ValueMember = "ID_DOCTO";
+                funciones.llenarCombo(clasedocumento, listad);
+            }
+
+
+            persona person = new persona();
+            persona lapersona = new persona();
+            person.ID_PERSONAS = idperson;
+            lapersona = clientePersonas.getPersona(person);
+
+            clasedocumento.SelectedValue = lapersona.ID_DOCTO;
+            identificacionpropietario.Text = lapersona.IDENTIFICACION;
+            nombrespropietario.Text = lapersona.NOMBRES;
+            primerapellido.Text = lapersona.APELLIDO1;
+            segundoapellido.Text = lapersona.APELLIDO2;
+            direccionpropietario.Text = lapersona.DIRECCION;
+            telefonopropietario.Text = lapersona.TELEFONO;
+            if (lapersona.ID_MUNICIPIO != "" && lapersona.ID_MUNICIPIO != null)
+            {
+                ciudad ciuda = new ciudad();
+                ciudad laciudad = new ciudad();
+                ciuda.ID_CIUDAD = Int32.Parse(lapersona.ID_MUNICIPIO);
+                laciudad = clienteAccesorias.getCiudadporID(ciuda);
+                if (laciudad != null)
+                {
+                    codigociudad.Text = laciudad.CODCIUDAD;
+                    nombreciudad.Text = laciudad.NOMBRE;
+                }
+            }
+        }
+
+        private void cargarEmpresa(int idempres)
+        {
+
+            empresa empres = new empresa();
+            empresa laempresa = new empresa();
+            empres.ID_EMPRESA = idempres;
+            Object[] lempres = (Object[])clienteEmpresas.getEmpresa(empres);
+            if (lempres != null && lempres.Length >= 0)
+            {
+                laempresa = (empresa)lempres[0];
+                nit.Text = laempresa.NIT;
+                nombreempresa.Text = laempresa.RAZONSOCIAL;
+            }
+        }
+
+        private void btnprimero_Click(object sender, EventArgs e)
+        {
+            if (listapropietariosaaa != null)
+            {
+                cargarPropietario(listapropietariosaaa, 0);
+            }
+        }
+
+        private void btnultimo_Click(object sender, EventArgs e)
+        {
+            if (listapropietariosaaa != null)
+            {
+                int fin = listapropietariosaaa.Length - 1;
+                cargarPropietario(listapropietariosaaa, fin);
+            }
+        }
+
+        private void btnsiguiente_Click(object sender, EventArgs e)
+        {
+            if (listapropietariosaaa != null)
+            {
+                if (numpropietario < listapropietariosaaa.Length - 1)
+                {
+                    numpropietario = numpropietario + 1;
+                    cargarPropietario(listapropietariosaaa, numpropietario);
+                }
+            }
+        }
+
+        private void btnanterior_Click(object sender, EventArgs e)
+        {
+            if (listapropietariosaaa != null)
+            {
+                if (numpropietario > 0)
+                {
+                    numpropietario = numpropietario - 1;
+                    cargarPropietario(listapropietariosaaa, numpropietario);
+                }
+            }
+        }
+
+        private void limpiarCampos()
+        {
+            btnprimero.Enabled = false;
+            btnanterior.Enabled = false;
+            btnsiguiente.Enabled = false;
+            btnultimo.Enabled = false;
+            listapropietariosaaa = null;
+            placavehiculo.Text = "";
+            marcavehiculo.Text = "";
+            lineavehiculo.Text = "";
+            clasevehiculo.Text = "";
+            numerochasis.Text = "";
+            tipocarroseria.Text = "";
+            numeromotor.Text = "";
+
+            if (quees == 1)
+            {
+                clasedocumento.DataSource = null;
+                clasedocumento.DisplayMember = "DESCRIPCION";
+                clasedocumento.ValueMember = "ID_DOCTO";
+                identificacionpropietario.Text = "";
+                nombrespropietario.Text = "";
+                primerapellido.Text = "";
+                segundoapellido.Text = "";
+                direccionpropietario.Text = "";
+                telefonopropietario.Text = "";
+                codigociudad.Text = "";
+                nombreciudad.Text = "";
+            }
+            else if (quees == 2)
+            {
+                nit.Text = "";
+                nombreempresa.Text = "";
+            }
+
+            editable = false;
+            btnSave.Enabled = false;
+            chkHabilitarBuscarPlaca.Checked = false;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (placavehiculo.Text != "" && placavehiculo.ReadOnly.Equals(false) && vehiculoAsociado != null && vehiculoAsociado.ID_VEHICULO > 0)
+            {
+                editarCupo();
+            }
+            else 
+            {
+                funciones.mostrarMensaje("Debe buscar primero el Vehículo", "I");
+                btnSave.Enabled = false;
+            }
+        }   
+
+        private void editarCupo()
+        {
+            Object[] tmp;
+            cuposTaxisTrans myCupo = new cuposTaxisTrans();
+            cuposTaxisTrans myCupoTmp = new cuposTaxisTrans();
+
+            myCupo.TT_IDCUPOTAXI = vistaseleccionada.ID;
+            myCupo = clienteCuposTrans.getCuposTaxisTransPorId(myCupo);
+
+            if (vehiculoAsociado != null && vehiculoAsociado.ID_VEHICULO > 0)
+            {
+                myCupoTmp.TT_ID_VEHICULO = vehiculoAsociado.ID_VEHICULO;
+
+                tmp = (Object[])clienteCuposTrans.getSCupos(myCupoTmp);
+
+                if (tmp != null && tmp.Length > 0)
+                {
+                    funciones.mostrarMensaje("Este Vehículo ya tiene cupos asignados", "I");
+                    placavehiculo.Focus();
+                    return;
+                }
+                else
+                {
+                    if (myCupo != null)
+                    {
+                        myCupo.TT_ID_VEHICULO = vehiculoAsociado.ID_VEHICULO;
+
+                        bool editado = clienteCuposTrans.editarCuposTaxis(myCupo);
+
+                        if (editado)
+                        {
+                            funciones.mostrarMensaje("Cupo Actualizado Correctamente", "I");
+
+                            limpiarCampos();
+                            //buscarVehiculo();
+                            btnSave.Enabled = false;
+                        }
+                        else
+                        {
+                            funciones.mostrarMensaje("No fue posible realizar la actualizacion", "I");
+
+                            limpiarCampos();
+                        }
+                    }
+                    else
+                    { 
+                        funciones.mostrarMensaje("No fue posible realizar la actualización", "I");
+
+                        limpiarCampos();
+                    }
+                }
+            }
+            else
+            {
+                funciones.mostrarMensaje("Se debe Definir el Vehículo", "E");
+            }
+        }
+
+        private void placavehiculo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (placavehiculo.Text == "")
+                {
+                    MessageBox.Show("Debe ingresar el numero de Placa del Vehiculo", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    placavehiculo.Focus();
+                }
+                else
+                {
+                    buscarPendientes();
+                }
+            }
+        }
+
+        private void numcupo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                verificarCupos();
+            }
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            busquedaCupos();
+        }
+
+        private void busquedaCupos()
+        {
+            Funciones func = WS.Funciones();
+
+            grillacupos.DataSource = null;
+
+            limpiarCampos();
+
+            if (rdBuscarNumero.Checked)
+            {
+                if (!txtNroCupo.Text.Equals(""))
+                {
+                    cuposTaxisTrans myCuposTax = new cuposTaxisTrans();
+                    myCuposTax.TT_NUMCUPO = int.Parse(txtNroCupo.Text);
+
+                    object[] listaCuposTax = mySerCuposTrans.getSCupos(myCuposTax);
+
+                    if (listaCuposTax != null && listaCuposTax.Length > 0)
+                    {
+                        myCuposTax = (cuposTaxisTrans)listaCuposTax[0];
+                        viewCupos myViewCupos = new viewCupos();
+                        myViewCupos.ID = myCuposTax.TT_IDCUPOTAXI;
+
+                        object[] listaViewCupos = mySerCuposTrans.getSViewCupos(myViewCupos);
+
+                        if (listaViewCupos != null && listaViewCupos.Length > 0)
+                        {
+                            myViewCupos = (viewCupos)listaViewCupos[0];
+                            vehiculo myVehiculo = new vehiculo();
+
+                            myVehiculo.PLACA = myViewCupos.PLACA;
+                            clienteVehiculos = WS.ServiciosVehiculosService();
+                            myVehiculo = clienteVehiculos.getVehiculo(myVehiculo);
+
+                            if (myVehiculo != null && myVehiculo.ID_VEHICULO > 0)
+                            {
+                                llenarCamposVehiculo(myVehiculo.ID_VEHICULO);
+                            }
+
+                            empresasdeServicioTrans myEmpresa = new empresasdeServicioTrans();
+                            myEmpresa.NOMBRE = myViewCupos.EMPRESAS;
+                            myEmpresa.DIGVERIF = -2;
+
+                            object[] listaEmpresa = mySerCuposTrans.getEmpresaServicio(myEmpresa);
+
+                            if (listaEmpresa != null && listaEmpresa.Length > 0)
+                            {
+                                myEmpresa = (empresasdeServicioTrans)listaEmpresa[0];
+
+                                //Se asigna la empresa
+                                newempresa = myEmpresa;
+                                siglaempresa.Text = myEmpresa.NIT;
+                                nombreempresa.Text = myEmpresa.NOMBRE;
+                            }
+                            else 
+                            {
+                                buscarEmpresa();
+                            }
+
+                            tipoVehiculoTrans myTipoVeh = new tipoVehiculoTrans();
+                            myTipoVeh.NOMBRE = myViewCupos.TIPOVEHI;
+
+                            object[] listaTipo = mySerCuposTrans.buscarTipoVehiculoTrans(myTipoVeh);
+
+                            if (listaTipo != null && listaTipo.Length > 0)
+                            {
+                                myTipoVeh = (tipoVehiculoTrans)listaTipo[0];
+                                cmbTipoVehiculo.SelectedValue = myTipoVeh.ID;
+                            }
+                        }
+
+                        contenedordatoscupo.Enabled = true;
+                        numcupo.Text = txtNroCupo.Text;
+
+                        verificarCupos();
+                    }
+                    else
+                    {
+                        func.mostrarMensaje("No se encontró un cupo con ese número", "W");
+                    }
+
+                    /*detalleRangoCupoTrans myDetalleRanCupo = new detalleRangoCupoTrans();
+                    myDetalleRanCupo.NROCUPO = numcupo.Text;
+                    myDetalleRanCupo.ASIGNADO = "T";
+                    object[] listaDetalle = mySerCuposTrans.getSInventarioCuposEmpresa(myDetalleRanCupo);
+                    if (listaDetalle != null && listaDetalle.Length > 0)
+                    {
+                        myDetalleRanCupo = (detalleRangoCupoTrans)listaDetalle[0];
+                        rangoCuposVehiculoPublicoTrans myRangoCupo = new rangoCuposVehiculoPublicoTrans();
+                        myRangoCupo.ID_RANGOCUPO = myDetalleRanCupo.IDRANGOCUPO;
+                        object[] listaRangos = mySerCuposTrans.getSRangoCuposVehiculo(myRangoCupo);
+                        if (listaRangos != null && listaRangos.Length > 0)
+                        {
+                            myRangoCupo = (rangoCuposVehiculoPublicoTrans)listaRangos[0];
+                            tipovehiculo.SelectedValue = myRangoCupo.IDTIPOVEHICULO;
+                            empresasdeServicioTrans myEmpresaServicio = new empresasdeServicioTrans();
+                            myEmpresaServicio.ID_EMPSERVICIO = myRangoCupo.IDEMPRESATRANSP;
+                            object[] listaEmpresa = mySerCuposTrans.getEmpresaServicio(myEmpresaServicio);
+                            if (listaEmpresa != null && listaEmpresa.Length > 0)
+                            {
+                                myEmpresaServicio = (empresasdeServicioTrans)listaEmpresa[0];
+                                siglaempresa.Text = myEmpresaServicio.NIT;
+                                nombreempresa.Text = myEmpresaServicio.NOMBRE;
+                                newempresa = myEmpresaServicio;
+                                //verificarCupos();
+                                viewCupos viewCupos = new viewCupos();
+                                viewCupos.NUMERO = int.Parse(myDetalleRanCupo.NROCUPO);
+                                object[] listaViewC = mySerCuposTrans.getSViewCupos(viewCupos);
+                                if (listaViewC != null && listaViewC.Length > 0)
+                                {
+                                    viewCupos = (viewCupos)listaViewC[0];
+                                    inicial = true;
+                                    buscarVehiculo();
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No se encontraron cupos con ese número", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }*/
+                }
+                else
+                {
+                    MessageBox.Show("El campo número de cupo no puede ser vacio", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            if (rdPlaca.Checked)
+            {
+                if (!txtPlaca.Text.Equals(""))
+                {
+                    vehiculo myVehiculo = new vehiculo();
+                    myVehiculo.PLACA = txtPlaca.Text;
+                    ServiciosVehiculosService mySerVehi = WS.ServiciosVehiculosService();
+
+                    myVehiculo = mySerVehi.getVehiculo(myVehiculo);
+
+                    if (myVehiculo != null && myVehiculo.ID_VEHICULO > 0)
+                    {
+                        cuposTaxisTrans myCuposTaxi = new cuposTaxisTrans();
+                        myCuposTaxi.TT_ID_VEHICULO = myVehiculo.ID_VEHICULO;
+
+                        object[] listaCupos = mySerCuposTrans.getSCupos(myCuposTaxi);
+
+                        if (listaCupos != null && listaCupos.Length > 0)
+                        {
+                            myCuposTaxi = (cuposTaxisTrans)listaCupos[0];
+                            numcupo.Text = myCuposTaxi.TT_NUMCUPO.ToString();
+                            llenarCamposVehiculo(myVehiculo.ID_VEHICULO);
+                            viewCupos myViewCupos = new viewCupos();
+                            myViewCupos.ID = myCuposTaxi.TT_IDCUPOTAXI;
+                            myViewCupos.NUMERO = myCuposTaxi.TT_NUMCUPO;
+
+                            object[] listaViewCupos = mySerCuposTrans.getSViewCupos(myViewCupos);
+
+                            if (listaViewCupos != null && listaViewCupos.Length > 0)
+                            {
+                                myViewCupos = (viewCupos)listaViewCupos[0];
+                                empresasdeServicioTrans myEmpresa = new empresasdeServicioTrans();
+                                myEmpresa.NOMBRE = myViewCupos.EMPRESAS;
+
+                                object[] listaEmpresa = mySerCuposTrans.getEmpresaServicio(myEmpresa);
+
+                                if (listaEmpresa != null && listaEmpresa.Length > 0)
+                                {
+                                    myEmpresa = (empresasdeServicioTrans)listaEmpresa[0];
+                                    //Se asigna la empresa
+                                    newempresa = myEmpresa;
+                                    nombreempresa.Text = myEmpresa.NOMBRE;
+                                    siglaempresa.Text = myEmpresa.NIT;
+                                }
+
+                                tipoVehiculoTrans myTipoVeh = new tipoVehiculoTrans();
+                                myTipoVeh.NOMBRE = myViewCupos.TIPOVEHI;
+                                object[] listaTipoCupo = mySerCuposTrans.buscarTipoVehiculoTrans(myTipoVeh);
+
+                                if (listaTipoCupo != null && listaTipoCupo.Length > 0)
+                                {
+                                    myTipoVeh = (tipoVehiculoTrans)listaTipoCupo[0];
+                                    cmbTipoVehiculo.SelectedValue = myTipoVeh.ID;
+                                }
+                            }
+
+                            contenedordatoscupo.Enabled = true;
+
+                            verificarCupos();
+                        }
+                        else
+                        {
+                            func.mostrarMensaje("El Vehículo no tiene un cupo asociado", "W");
+                        }
+                    }
+                    else
+                    {
+                        func.mostrarMensaje("No se encontró el Vehículo", "W");
+                    }
+                }
+                else
+                {
+                    func.mostrarMensaje("El campo placa no puede ser vacio!", "W");
+                }
+            }
+        }
+
+        private void llenarCamposVehiculo(int idVehiculo)
+        {
+            if (idVehiculo > 0)
+            {
+                vehiculo myVehi = new vehiculo();
+                myVehi.ID_VEHICULO = idVehiculo;
+                ServiciosVehiculosService mySerVehi = WS.ServiciosVehiculosService();
+
+                myVehi = mySerVehi.getVehiculo(myVehi);
+
+                if (myVehi != null && myVehi.ID_VEHICULO > 0)
+                {
+                    contenedorvehiculo.Enabled = true;
+                    viewVehiculo myViewVehiculo = new viewVehiculo();
+                    myViewVehiculo.PLACA = myVehi.PLACA;
+                    ServiciosViewVehiculoService mySerViewVehi = WS.ServiciosViewVehiculoService();
+
+                    object[] listVehiculo = mySerViewVehi.getSViewVehiculo(myViewVehiculo);
+
+                    if (listVehiculo != null && listVehiculo.Length > 0)
+                    {
+                        myViewVehiculo = (viewVehiculo)listVehiculo[0];
+
+                        //placavehiculo.Text = myViewVehiculo.PLACA;
+                        marcavehiculo.Text = myViewVehiculo.MARCAVEH;
+                        lineavehiculo.Text = myViewVehiculo.LINEAVEH;
+                        clasevehiculo.Text = myViewVehiculo.CLASEVEH;
+                        numerochasis.Text = myViewVehiculo.NUMEROCHASIS;
+                        tipocarroseria.Text = myViewVehiculo.TIPOCARROCERIA;
+                        numeromotor.Text = myViewVehiculo.NUMEROMOTOR;
+                    }
+
+                    clientePropietarios = WS.ServiciosPropietariosService();
+                    propietarioDeVehiculo myPropietariosVehi = new propietarioDeVehiculo();
+                    myPropietariosVehi.ID_VEHICULO = myVehi.ID_VEHICULO;
+                    myPropietariosVehi.PROPIETARIOACTUAL = "T";
+
+                    object[] listaProp = clientePropietarios.getPropietariosDeVehiculos(myPropietariosVehi);
+
+                    if (listaProp != null && listaProp.Length > 0)
+                    {
+                        contenedorpropietarios.Enabled = true;
+                        btnSave.Enabled = true;
+
+                        if (listaProp.Length > 0)
+                        {
+                            btnprimero.Enabled = true;
+                            btnanterior.Enabled = true;
+                            btnsiguiente.Enabled = true;
+                            btnultimo.Enabled = true;
+                        }
+                        else
+                        {
+                            btnprimero.Enabled = false;
+                            btnanterior.Enabled = false;
+                            btnsiguiente.Enabled = false;
+                            btnultimo.Enabled = false;
+                        }
+
+                        cargarPropietario(listaProp, 0);
+                    }
+                }
+            }
+        }
+
+        private void limpiarEmpresa()
+        {
+            siglaempresa.Text = "";
+            nombreempresa.Text = "";
+            cmbTipoVehiculo.SelectedIndex = -1;
+            numcupo.Text = "";
+            contenedordatoscupo.Enabled = false;
+        }
+
+        private void rdBuscarNumero_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdBuscarNumero.Checked)
+            {
+                txtNroCupo.Enabled = true;
+                txtPlaca.Enabled = false;
+            }
+            else
+            {
+                txtNroCupo.Enabled = false;
+                txtPlaca.Enabled = false;
+            }
+        }
+
+        private void rdPlaca_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdPlaca.Checked)
+            {
+                txtPlaca.Enabled = true;
+                txtNroCupo.Enabled = false;
+            }
+            else
+            {
+                txtPlaca.Enabled = false;
+                txtNroCupo.Enabled = false;
+            }
+        }
+
+        private void txtNroCupo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Funciones fun = WS.Funciones();
+            fun.esNumero(e);
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                busquedaCupos();
+            }
+        }
+
+        private void txtPlaca_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Funciones fun = new Funciones();
+            fun.esAlfanumerico(e);
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+                busquedaCupos();
+            }
+        }
+
+        private void rdBuscarNumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Funciones myFun = new Funciones();
+            myFun.lanzarTapConEnter(e);
+        }
+
+        private void rdPlaca_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Funciones myFun = new Funciones();
+            myFun.lanzarTapConEnter(e);
+        }
+
+        private void cmbTipoVehiculo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Funciones myFun = new Funciones();
+            myFun.lanzarTapConEnter(e);
+        }
+
+        private void chkHabilitarBuscarPlaca_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkHabilitarBuscarPlaca.Checked)
+            {
+                if (editable)
+                {
+                    funciones.mostrarMensaje("Edite el cupo buscando la información del nuevo vehículo a asociar", "I");
+
+                    btnbuscarvehiculo.Enabled = true;
+                    placavehiculo.ReadOnly = false;
+                }
+            }
+            else 
+            {
+                btnbuscarvehiculo.Enabled = false;
+                placavehiculo.ReadOnly = true;
+            }
+        }
+
+        private void placavehiculo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            btnSave.Enabled = false;
+        }
+    }
+}

@@ -1,0 +1,348 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using LibreriasSintrat.ServiciosCuposTrans;
+using LibreriasSintrat.ServiciosAccesorias;
+using LibreriasSintrat;
+using LibreriasSintrat.utilidades;
+using LibreriasSintrat.ServiciosLogs;
+using LibreriasSintrat.ServiciosUsuarios;
+using TransportePublico.utilidades;
+
+namespace TransportePublico.servicios
+{
+    public partial class FrmEmpresaServicio : Form
+    {
+        empresasdeServicioTrans empresaActual;
+        ServiciosCuposTransService clienteCupos;
+        ServiciosAccesoriasService clienteCAccesorias;
+        Funciones funciones;
+        ServiciosLogsService serviciosLogs;
+        usuarios usuarioSistema;
+
+        int modo = 0;
+
+        public FrmEmpresaServicio(int modoOp, usuarios user)
+        {
+            usuarioSistema = user;
+            serviciosLogs = WS.ServiciosLogsService();
+
+            InitializeComponent();
+            empresaActual = new empresasdeServicioTrans();
+            clienteCupos = WS.ServiciosCuposTransService();
+            clienteCAccesorias = WS.ServiciosAccesoriasService();
+            funciones = new Funciones();
+
+            modo = modoOp;
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            limpiarCampos(true);
+        }
+
+        public void limpiarCampos(bool todo)
+        {
+            if (todo)
+            {
+                cmbTipoDocumento.SelectedIndex = -1;
+                txtNit.Clear();
+            }
+
+            txtDigitoVerificacion.Clear();
+            txtDireccion.Clear();
+            txtRazonSocial.Clear();
+            txtSiglas.Clear();
+            txtTelefono.Clear();
+        }
+
+        public void crearObjeto()
+        {
+            //empresaActual = new empresasdeServicioTrans();
+            int digitoVerificacion;
+
+            if (!String.IsNullOrEmpty(txtDigitoVerificacion.Text))
+            {
+                digitoVerificacion = int.Parse(txtDigitoVerificacion.Text);
+                empresaActual.DIGVERIF = digitoVerificacion;
+            }
+            else empresaActual.DIGVERIF = -1;
+
+            empresaActual.DIRECCION = txtDireccion.Text;
+            empresaActual.NIT = txtNit.Text;
+            empresaActual.NOMBRE = txtRazonSocial.Text;
+            empresaActual.SIGLA = txtSiglas.Text;
+            empresaActual.TELEFONO = txtTelefono.Text;
+
+            if (cmbTipoDocumento.SelectedIndex > -1)
+                empresaActual.ID_DOCTO = cmbTipoDocumento.SelectedValue.ToString();
+            else
+                empresaActual.ID_DOCTO = null;
+        }
+
+        public void mostrarObjeto()
+        {
+            //int digitoVerificacion = 0;
+
+            if (empresaActual.DIGVERIF >= 0)
+                txtDigitoVerificacion.Text = empresaActual.DIGVERIF.ToString();
+            else txtDigitoVerificacion.Text = "";
+
+            txtDireccion.Text = empresaActual.DIRECCION;
+            txtNit.Text = empresaActual.NIT;
+            txtRazonSocial.Text = empresaActual.NOMBRE;
+            txtTelefono.Text = empresaActual.TELEFONO;
+            txtSiglas.Text = empresaActual.SIGLA;
+
+            if (empresaActual.ID_DOCTO != null)
+                cmbTipoDocumento.SelectedValue = empresaActual.ID_DOCTO;
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            if (cmbTipoDocumento.SelectedIndex > -2 && txtNit.Text != "")
+                buscarEmpresa();
+            else
+                MessageBox.Show("Los campos tipo de documento, y Número de identificación son obligatorios");
+        }
+
+        private void buscarEmpresa()
+        {
+            //limpiarCampos(false);
+            empresaActual = new empresasdeServicioTrans();
+
+            if (cmbTipoDocumento.SelectedValue != null)
+                empresaActual.ID_DOCTO = cmbTipoDocumento.SelectedValue.ToString();
+
+            empresaActual.NIT = txtNit.Text;
+
+            int idDigitoVerificacion;
+
+            if (!String.IsNullOrEmpty(txtDigitoVerificacion.Text))
+            {
+               idDigitoVerificacion = int.Parse(txtDigitoVerificacion.Text);
+               empresaActual.DIGVERIF = idDigitoVerificacion;
+            }
+            else  empresaActual.DIGVERIF = -1;
+
+            logs tmpLog = new logs();
+            tmpLog.FECHA_HORA = DateTime.Now.ToString("dd/MM/yyyy");
+            tmpLog.ID_USUARIO = usuarioSistema.ID_USUARIO;
+            tmpLog.OBJETO = "EMPRESASDESERVICIO";
+            tmpLog.MODULO = "TPUBLICO";
+            tmpLog.TIPO_TRANSACCION = "SELECT";
+            TimeSpan TS;
+            DateTime dt1 = DateTime.Now;
+            string objetoAnalizado = AnalizadorDeObjetos.analizarObjeto(empresaActual.GetType(), new object[] { empresaActual});
+            tmpLog.ESTADO_ANTERIOR = objetoAnalizado;
+
+            object[] listaEmpresas = clienteCupos.getEmpresaServicio(empresaActual);
+
+            if (listaEmpresas != null && listaEmpresas.Length > 0)
+            {
+                DateTime dt2 = DateTime.Now;
+                TS = new TimeSpan(dt2.Ticks - dt1.Ticks);
+                tmpLog.TIEMPO_EJECUCION = TS.Milliseconds;
+                serviciosLogs.crearRegistroLog(tmpLog);
+
+                empresaActual = (empresasdeServicioTrans)listaEmpresas[0];
+                mostrarObjeto();
+                txtRazonSocial.Focus();
+            }
+            else
+            {
+                MessageBox.Show("No se encontrarón empresas de servicio que coincidan con estos criterios de busqueda.");
+                cmbTipoDocumento.Focus();
+
+                limpiarCampos(false);
+            }
+        }
+
+        public bool esObjetoCorrecto()
+        {
+            if (txtNit.Text == "")
+            {
+                if (txtRazonSocial.Text == "")
+                {
+                    if (btnBuscar.Visible == true && empresaActual.ID_EMPSERVICIO < 1)
+                    {
+                        MessageBox.Show("Debe buscar primero una empresa de servicio a editar");
+                        return false;
+                    }
+
+                    MessageBox.Show("Debe introducir la razón social");
+                    return false;
+                }
+
+                MessageBox.Show("Debe introducir un NIT");
+                return false;
+            }
+            else
+            {
+                if (modo == 0) // 0 crear, 1 editar
+                {
+                    //validando que el NIT no exista para otra empresa
+                    empresasdeServicioTrans empresaAsociada = new empresasdeServicioTrans();
+                    empresaAsociada.ID_DOCTO = cmbTipoDocumento.SelectedValue.ToString();
+                    empresaAsociada.NIT = txtNit.Text;
+
+                    if (!String.IsNullOrEmpty(txtDigitoVerificacion.Text))
+                    {
+                        empresaAsociada.DIGVERIF = int.Parse(txtDigitoVerificacion.Text);
+                    }
+                    else empresaAsociada.DIGVERIF = -1; //indica que no tiene digito de verificacion
+
+                    logs tmpLog = new logs();
+                    tmpLog.FECHA_HORA = DateTime.Now.ToString("dd/MM/yyyy");
+                    tmpLog.ID_USUARIO = usuarioSistema.ID_USUARIO;
+                    tmpLog.OBJETO = "EMPRESASDESERVICIO";
+                    tmpLog.MODULO = "TPUBLICO";
+                    tmpLog.TIPO_TRANSACCION = "SELECT";
+                    TimeSpan TS;
+                    DateTime dt1 = DateTime.Now;
+
+                    string objetoAnalizado = AnalizadorDeObjetos.analizarObjeto(empresaAsociada.GetType(), new object[] { empresaAsociada});
+                    tmpLog.ESTADO_ANTERIOR = objetoAnalizado;
+
+
+                    object[] listaEmpresas = clienteCupos.getEmpresaServicio(empresaAsociada);
+
+                    DateTime dt2 = DateTime.Now;
+                    TS = new TimeSpan(dt2.Ticks - dt1.Ticks);
+                    tmpLog.TIEMPO_EJECUCION = TS.Milliseconds;
+                    serviciosLogs.crearRegistroLog(tmpLog);
+
+                    if (listaEmpresas != null && listaEmpresas.Length > 0)
+                    {
+                        MessageBox.Show("El NIT ya existe para otra Empresa");
+                        return false;
+                    }
+                    else return true;
+                }
+                else return true;
+            }
+        }
+
+        public void terminar()
+        {
+            crearObjeto();
+
+            if (empresaActual.ID_EMPSERVICIO > 0)
+            {
+                logs tmpLog = new logs();
+                tmpLog.FECHA_HORA = DateTime.Now.ToString("dd/MM/yyyy");
+                tmpLog.ID_USUARIO = usuarioSistema.ID_USUARIO;
+                tmpLog.OBJETO = "EMPRESASDESERVICIO";
+                tmpLog.MODULO = "TPUBLICO";
+                tmpLog.TIPO_TRANSACCION = "UPDATE";
+                TimeSpan TS;
+                DateTime dt1 = DateTime.Now;
+
+                string objetoAnalizado = AnalizadorDeObjetos.analizarObjeto(empresaActual.GetType(), new object[] { empresaActual});
+                tmpLog.ESTADO_ANTERIOR = objetoAnalizado;
+
+                clienteCupos.editarEmpresasdeServicioTrans(empresaActual);
+
+                DateTime dt2 = DateTime.Now;
+                TS = new TimeSpan(dt2.Ticks - dt1.Ticks);
+                tmpLog.TIEMPO_EJECUCION = TS.Milliseconds;
+                serviciosLogs.crearRegistroLog(tmpLog);
+
+
+                if (empresaActual != null && empresaActual.ID_EMPSERVICIO > 0)
+                    MessageBox.Show("Empresa servicio modificada correctamente");
+                else
+                    MessageBox.Show("No se pudó actualizar o modificar la Empresa servicio.");
+            }
+            else
+            {
+                empresaActual = clienteCupos.crearEmpresasdeServicioTrans(empresaActual);
+
+                if (empresaActual != null && empresaActual.ID_EMPSERVICIO > 0)
+                    MessageBox.Show("Empresa servicio creada correctamente");
+                else
+                    MessageBox.Show("No se pudo crear la Empresa servicio");
+            }
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            bool val = esObjetoCorrecto();
+
+            if (val)
+                terminar();
+        }
+
+        private void FrmEmpresaServicio_Load(object sender, EventArgs e)
+        {
+            
+            logs tmpLog = new logs();
+            tmpLog.FECHA_HORA = DateTime.Now.ToString("dd/MM/yyyy");
+            tmpLog.ID_USUARIO = usuarioSistema.ID_USUARIO;
+            tmpLog.OBJETO = "DOCUMENTO";
+            tmpLog.MODULO = "TPUBLICO";
+            tmpLog.TIPO_TRANSACCION = "SELECT";
+            TimeSpan TS; 
+            DateTime dt1 = DateTime.Now;
+
+            object[] listaTipoDocumentos = clienteCAccesorias.getDocumentos();
+
+            DateTime dt2 = DateTime.Now;
+            TS = new TimeSpan(dt2.Ticks - dt1.Ticks);
+            tmpLog.TIEMPO_EJECUCION = TS.Milliseconds;
+            serviciosLogs.crearRegistroLog(tmpLog);
+
+            if (listaTipoDocumentos != null && listaTipoDocumentos.Length > 0)
+                funciones.llenarCombo(cmbTipoDocumento, listaTipoDocumentos);
+
+            cmbTipoDocumento.SelectedValue = "N"; //por defecto NIT 
+        }
+
+        private void cmbTipoDocumento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funciones.lanzarTapConEnter(e);
+        }
+
+        private void txtNit_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funciones.esNumero(e);
+            funciones.lanzarTapConEnter(e);
+        }
+
+        private void txtDigitoVerificacion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funciones.esNumero(e);
+            funciones.lanzarTapConEnter(e);
+        }
+
+        private void txtTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funciones.lanzarTapConEnter(e);
+        }
+
+        private void txtDireccion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funciones.lanzarTapConEnter(e);
+        }
+
+        private void txtSiglas_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funciones.lanzarTapConEnter(e);
+        }
+
+        private void txtRazonSocial_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            funciones.lanzarTapConEnter(e);
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+    }
+}

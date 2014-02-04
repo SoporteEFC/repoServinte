@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using LibreriasSintrat.ServiciosCuposTrans;
+using LibreriasSintrat.utilidades;
+
+namespace TransportePublico.servicios.cupos
+{
+    public partial class ListarCupos : Form
+    {
+        ServiciosCuposTransService clienteCuposTrans;
+
+        public ListarCupos()
+        {
+            clienteCuposTrans = WS.ServiciosCuposTransService();
+            InitializeComponent();
+        }
+
+        private void ListarCupos_Load(object sender, EventArgs e)
+        {
+            tipoVehiculoTrans tipo = new tipoVehiculoTrans();
+            
+            Funciones funciones = WS.Funciones();
+            Object[] listat = (Object[])clienteCuposTrans.getTipoVehiculoTrans(tipo);
+            if (listat != null && listat.Length > 0)
+            {
+                cmbTioVehiculo.DataSource = null;
+                cmbTioVehiculo.DisplayMember = "NOMBRE";
+                cmbTioVehiculo.ValueMember = "ID";
+                funciones.llenarCombo(cmbTioVehiculo, listat);
+                cmbTioVehiculo.SelectedIndex = -1;
+            }
+        }
+
+        private void btnBuscarCupos_Click(object sender, EventArgs e)
+        {
+            object[] listaCupos;
+            inventariocupos tmpCupo = new inventariocupos();
+        }
+    }
+}

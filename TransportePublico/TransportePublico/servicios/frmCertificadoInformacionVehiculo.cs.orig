@@ -1,0 +1,277 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using LibreriasSintrat.ServiciosDocumentos;
+using LibreriasSintrat.utilidades;
+using LibreriasSintrat.ServiciosConfiguraciones;
+using LibreriasSintrat.ServiciosTransito;
+using LibreriasSintrat.ServiciosAccesorias;
+using System.IO;
+using Word = Microsoft.Office.Interop.Word;
+using LibreriasSintrat.forms.documentos;
+using TransportePublico.servicios.documentos;
+
+namespace TransportePublico.servicios
+{
+    public partial class frmCertificadoInformacionVehiculo : Form
+    {
+        ServiciosDocumentosService serviciosDocumentos;
+        ServiciosConfiguracionesService serviciosConfiguraciones;
+        Funciones funciones;
+
+        public frmCertificadoInformacionVehiculo()
+        {
+            InitializeComponent();
+            funciones = WS.Funciones();
+            serviciosDocumentos = WS.ServiciosDocumentosService();
+            serviciosConfiguraciones = WS.ServiciosConfiguracionesService();
+        }
+
+        private String crearSqlInformacionVehiculoTransportePublico(String placa)
+        {
+            String sql;
+            sql = "select " +
+                    "vehiculo.placa as PLACA, " +
+                    "tipovehiculo.nombre as TIPO_VEHICULO, " +
+                    "vehiculo.nro_motor as MOTOR, " +
+                    "vehiculo.chasis as CHASIS, " +
+                    "vehiculo.serie_motor as SERIE, " +
+                    "tt_tarjetaoperacion.numero as No_TARJETA_OPERACION, " +
+                    "tt_tarjetaoperacion.fechavencimiento as FECHA_VENCE, " +
+                    "t_cupostaxis.tt_numcupo as CUPO, " +
+                    "empresasdeservicio.nombre as EMPRESA, " +
+                    "runtradioaccion.descripcion as RADIO_ACCION, " +
+                    "vehiculo.capacidad as CAPACIDAD, " +
+                    "vehiculo.capacidadton as CAPACIDAD_TONELADAS " +
+                    "from " +
+                    "vehiculo " +
+                    "left join t_cupostaxis on (vehiculo.id_vehiculo = t_cupostaxis.tt_id_vehiculo) " +
+                    "left join tipovehiculo on (t_cupostaxis.tt_tipoveh = tipovehiculo.id) " +
+                    "left join tt_tarjetaoperacion on (t_cupostaxis.tt_idcupotaxi = tt_tarjetaoperacion.idcupo) " +
+                    "left join empresasdeservicio on (t_cupostaxis.tt_id_empservicio = empresasdeservicio.id_empservicio) " +
+                    "left join runtradioaccion on (vehiculo.id_runtradioaccion = runtradioaccion.id_runtradioaccion) " +
+                    "where " +
+                    "vehiculo.id_servicio = 2 and " +
+                    "tt_tarjetaoperacion.estado = 'activo' and " +
+                    "vehiculo.id_motivocancelacion is null and " +
+                    "vehiculo.vehforaneo is null and " +
+                    "vehiculo.placa = '" + placa + "'";
+            return sql;
+        }
+
+        private void generarCertificadoInformacionVehiculoTranportePublico(String placa)
+        {
+            String query;
+            Object[] objTmp;
+            ArrayList campos;
+            DataTable datos;
+            
+            query = crearSqlInformacionVehiculoTransportePublico(placa);
+            objTmp = serviciosDocumentos.verificarConsulta(query);
+            datos = new DataTable();
+
+            if (objTmp != null)
+            {
+                campos = funciones.ObjectToArrayList(objTmp);
+                objTmp = serviciosDocumentos.executeQueryPrincipal(query);
+                datos = funciones.getData(funciones.ObjectToArrayList(objTmp), campos);
+                if (datos.Rows.Count > 0)
+                {
+                    dataGridView1.DataSource = datos;
+
+                    // Aqui obtengo los datos de la secretaria de transito
+                    ServiciosTransitoService servicioTransito = WS.ServiciosTransitoService();
+                    LibreriasSintrat.ServiciosTransito.transito transitoLocal = new LibreriasSintrat.ServiciosTransito.transito();
+                    transitoLocal = servicioTransito.obtenerTransito();
+
+                    // Aqui obtengo la fecha y hora del sistema
+                    ServiciosAccesoriasService servicioAccesorias = WS.ServiciosAccesoriasService();
+                    String fecha;
+                    fecha = servicioAccesorias.getFechaActualTexto();
+                    ciudad ciudadTransito = new ciudad();
+                    Object[] ciudades;
+
+                    if (transitoLocal != null && transitoLocal.ID_TRANSITO > 0)
+                    {
+                        // Aqui obtengo la ciudad del transito
+                        ciudadTransito.ID_CIUDAD = transitoLocal.ID_CIUDAD;
+                        ciudades = servicioAccesorias.getCiudadesPorDepto(ciudadTransito);
+                        if (ciudades != null)
+                            ciudadTransito = (ciudad)ciudades[0];
+                    }
+
+                    //object fileName = "c:\\certificadoInformacionVehiculoTransportePublico.dotx";
+                    object fileName = serviciosConfiguraciones.leerRegistroIni("PLANTILLAS") + "\\certificadoInformacionVehiculoTransportePublico.dotx";
+                    transferir myTransferencia = new transferir();
+                    myTransferencia.archivoDelServerSinAbrir((String)fileName);
+
+                    //************************************************** INSERCION DE LOGO ***************************
+
+                    funciones.insertarLogoTransitoOLD((String)fileName, Funciones.alineacionlogo.izquierda);
+
+                    //************************************************************************************************
+
+                    Dictionary<string, string> dicVariables = new Dictionary<string, string>();
+                    dicVariables.Add("PLACA", placa);
+
+
+                    if (datos.Rows[0][1].ToString() != "null" && datos.Rows[0][1].ToString().Length > 0)
+                        dicVariables.Add("TIPO_VEHICULO", datos.Rows[0][1].ToString());
+                    else
+                        dicVariables.Add("TIPO_VEHICULO", "");
+                    if (datos.Rows[0][2].ToString() != "null" && datos.Rows[0][2].ToString().Length > 0)
+                        dicVariables.Add("NRO_MOTOR", datos.Rows[0][2].ToString());
+                    else
+                        dicVariables.Add("NRO_MOTOR", "");
+                    if (datos.Rows[0][3].ToString() != "null" && datos.Rows[0][3].ToString().Length > 0)
+                        dicVariables.Add("CHASIS", datos.Rows[0][3].ToString());
+                    else
+                        dicVariables.Add("CHASIS", "");
+                    if (datos.Rows[0][4].ToString() != "null" && datos.Rows[0][4].ToString().Length > 0)
+                        dicVariables.Add("SERIE_MOTOR", datos.Rows[0][4].ToString());
+                    else
+                        dicVariables.Add("SERIE_MOTOR", "");
+                    if (datos.Rows[0][5].ToString() != "null" && datos.Rows[0][5].ToString().Length > 0)
+                        dicVariables.Add("NRO_TARJETA_OPERACION", datos.Rows[0][5].ToString());
+                    else
+                        dicVariables.Add("NRO_TARJETA_OPERACION", "");
+                    if (datos.Rows[0][6].ToString() != "null" && datos.Rows[0][6].ToString().Length > 0)
+                        dicVariables.Add("FECHA_VENCE_TARJETA", datos.Rows[0][6].ToString());
+                    else
+                        dicVariables.Add("FECHA_VENCE_TARJETA", "");
+                    if (datos.Rows[0][7].ToString() != "null" && datos.Rows[0][7].ToString().Length > 0)
+                        dicVariables.Add("NRO_CUPO", datos.Rows[0][7].ToString());
+                    else
+                        dicVariables.Add("NRO_CUPO", "");
+                    if (datos.Rows[0][8].ToString() != "null" && datos.Rows[0][8].ToString().Length > 0)
+                        dicVariables.Add("EMPRESA_SERVICIO", datos.Rows[0][8].ToString());
+                    else
+                        dicVariables.Add("EMPRESA_SERVICIO", "");
+                    if (datos.Rows[0][9].ToString() != "null" && datos.Rows[0][9].ToString().Length > 0)
+                        dicVariables.Add("RADIO_ACCION", datos.Rows[0][9].ToString());
+                    else
+                        dicVariables.Add("RADIO_ACCION", "");
+                    if (datos.Rows[0][10].ToString() != "null" && datos.Rows[0][10].ToString().Length > 0)
+                        dicVariables.Add("CAPACIDAD", datos.Rows[0][10].ToString());
+                    else
+                        dicVariables.Add("CAPACIDAD", "");
+                    if (datos.Rows[0][11].ToString() != "null" && datos.Rows[0][11].ToString().Length > 0)
+                        dicVariables.Add("CAPACIDADTON", datos.Rows[0][11].ToString());
+                    else
+                        dicVariables.Add("CAPACIDADTON", "");
+
+                    dicVariables.Add("CIUDAD_TRANSITO", ciudadTransito.NOMBRE);
+                    dicVariables.Add("FECHA_ACTUAL", fecha);
+                    dicVariables.Add("SECRETARIOTRANSITO", transitoLocal.SECRETARIOTRANSITO);
+                    dicVariables.Add("NOMBREALCALDIA", transitoLocal.NOMBREALCALDIA);
+                    dicVariables.Add("DESCRIPCION", transitoLocal.DESCRIPCION);
+                    dicVariables.Add("DIRECCION", transitoLocal.DIRECCION);
+                    dicVariables.Add("EMAIL", transitoLocal.EMAIL);
+
+                    String rutaarchivo = (String)fileName;
+                    String result = "";
+
+                    string misDocumentos = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                    string rutaTemp = misDocumentos + "\\filetemp.rtf";
+
+                    //Eliminar archivo temporal si existe
+                    if (File.Exists(rutaTemp))
+                        File.Delete(rutaTemp);
+
+
+                    Word.Application newApp = new Word.Application();
+                    //specifying the Source & Target file names
+                    object Source = rutaarchivo;//"c:\\abc\\Source.doc";
+                    object Target = rutaTemp;//"c:\\abc\\Target.rtf";
+
+                    // Use for the parameter whose type are not known or  
+                    // say Missing
+                    object Unknown = Type.Missing;
+
+                    //Source document open here
+                    //Additional Parameters are not known so that are  
+                    //set as a missing type
+                    newApp.Documents.Open(ref Source, ref Unknown,
+                         ref Unknown, ref Unknown, ref Unknown,
+                         ref Unknown, ref Unknown, ref Unknown,
+                         ref Unknown, ref Unknown, ref Unknown,
+                         ref Unknown, ref Unknown, ref Unknown, ref Unknown);
+
+                    ProcesadorDocumentos myProcesadorDocs = new ProcesadorDocumentos();
+
+                    //Reemplazar las variables en la plantilla
+                    myProcesadorDocs.reemplazarVariables(newApp, dicVariables);
+
+                    //Specifying the format in which you want the output file 
+                    object format = Word.WdSaveFormat.wdFormatRTF;
+
+                    //Changing the format of the document
+                    newApp.ActiveDocument.SaveAs(ref Target, ref format,
+                            ref Unknown, ref Unknown, ref Unknown,
+                            ref Unknown, ref Unknown, ref Unknown,
+                            ref Unknown, ref Unknown, ref Unknown,
+                            ref Unknown, ref Unknown, ref Unknown,
+                            ref Unknown, ref Unknown);
+
+                    //for closing the application
+                    newApp.Quit(ref Unknown, ref Unknown, ref Unknown);
+
+                    //Leer el contenido del archivo transformado
+                    System.Threading.Thread.Sleep(1000);    //Tiempo para que word cierre la app
+                    result = File.ReadAllText(Target.ToString());
+
+                    //Eliminar archivo temporal si existe
+                    if (File.Exists(rutaTemp))
+                        File.Delete(rutaTemp);
+
+
+                    String contenido = result;
+
+
+                    //contenido = myProcesadorDocs.reemplazarVariables(dicVariablesValores, contenido);
+
+                    if (contenido != null)
+                    {
+                        FrmGeneradorDocumentos myformGenerarDoc = new FrmGeneradorDocumentos(fileName.ToString(), misDocumentos + "\\siatt\\Certificado_Informacion_Vehiculo_Transporte_Publico_" + DateTime.Now.ToString("yyyyMMdd"), contenido, true, false, false, false, false, true, Modulo.Principal);
+
+                        DialogResult dr = myformGenerarDoc.ShowDialog(this);
+                        if (dr == DialogResult.OK)
+                        {
+                            String rutaguardar = myformGenerarDoc.rutaG;
+                        }
+                    }
+                    else
+                        MessageBox.Show("Error al generar el Certificado de Información del Vehículo de Transporte Público, cuando se intentaba reemplazar las variables de la plantilla.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    funciones.mostrarMensaje("El vehículo de placas " + placa + " no se encuentra registrado en la base de datos o no es de servicio público", "E");
+            }
+        }
+
+
+        private void btnGenerar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (String.IsNullOrEmpty(txtPlaca.Text))
+                {
+                    funciones.mostrarMensaje("Debe digitar una placa valida", "E");
+                    txtPlaca.Focus();
+                }
+                else
+                    generarCertificadoInformacionVehiculoTranportePublico(txtPlaca.Text);
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            
+        }
+    }
+}

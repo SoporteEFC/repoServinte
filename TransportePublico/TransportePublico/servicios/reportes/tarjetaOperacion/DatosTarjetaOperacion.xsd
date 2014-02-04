@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DatosTarjetaOperacion" targetNamespace="http://tempuri.org/DatosTarjetaOperacion.xsd" xmlns:mstns="http://tempuri.org/DatosTarjetaOperacion.xsd" xmlns="http://tempuri.org/DatosTarjetaOperacion.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DatosTarjetaOperacion" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="DatosTarjetaOperacion" msprop:Generator_UserDSName="DatosTarjetaOperacion" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TablaTarjetaOperacion" msprop:Generator_UserTableName="TablaTarjetaOperacion" msprop:Generator_RowDeletedName="TablaTarjetaOperacionRowDeleted" msprop:Generator_TableClassName="TablaTarjetaOperacionDataTable" msprop:Generator_RowChangedName="TablaTarjetaOperacionRowChanged" msprop:Generator_RowClassName="TablaTarjetaOperacionRow" msprop:Generator_RowChangingName="TablaTarjetaOperacionRowChanging" msprop:Generator_RowEvArgName="TablaTarjetaOperacionRowChangeEvent" msprop:Generator_RowEvHandlerName="TablaTarjetaOperacionRowChangeEventHandler" msprop:Generator_TablePropName="TablaTarjetaOperacion" msprop:Generator_TableVarName="tableTablaTarjetaOperacion" msprop:Generator_RowDeletingName="TablaTarjetaOperacionRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FECHAVENCIMIENTO" msprop:Generator_UserColumnName="FECHAVENCIMIENTO" msprop:Generator_ColumnPropNameInRow="FECHAVENCIMIENTO" msprop:Generator_ColumnVarNameInTable="columnFECHAVENCIMIENTO" msprop:Generator_ColumnPropNameInTable="FECHAVENCIMIENTOColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="PLACAUNICA" msprop:Generator_UserColumnName="PLACAUNICA" msprop:Generator_ColumnPropNameInRow="PLACAUNICA" msprop:Generator_ColumnVarNameInTable="columnPLACAUNICA" msprop:Generator_ColumnPropNameInTable="PLACAUNICAColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="TIPOCARROCERIA" msprop:Generator_UserColumnName="TIPOCARROCERIA" msprop:Generator_ColumnPropNameInRow="TIPOCARROCERIA" msprop:Generator_ColumnVarNameInTable="columnTIPOCARROCERIA" msprop:Generator_ColumnPropNameInTable="TIPOCARROCERIAColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="MARCA" msprop:Generator_UserColumnName="MARCA" msprop:Generator_ColumnPropNameInRow="MARCA" msprop:Generator_ColumnVarNameInTable="columnMARCA" msprop:Generator_ColumnPropNameInTable="MARCAColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="MODELO" msprop:Generator_UserColumnName="MODELO" msprop:Generator_ColumnPropNameInRow="MODELO" msprop:Generator_ColumnVarNameInTable="columnMODELO" msprop:Generator_ColumnPropNameInTable="MODELOColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="CLASECOMBUSTIBLE" msprop:Generator_UserColumnName="CLASECOMBUSTIBLE" msprop:Generator_ColumnPropNameInRow="CLASECOMBUSTIBLE" msprop:Generator_ColumnVarNameInTable="columnCLASECOMBUSTIBLE" msprop:Generator_ColumnPropNameInTable="CLASECOMBUSTIBLEColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="NROMOTOR" msprop:Generator_UserColumnName="NROMOTOR" msprop:Generator_ColumnPropNameInRow="NROMOTOR" msprop:Generator_ColumnVarNameInTable="columnNROMOTOR" msprop:Generator_ColumnPropNameInTable="NROMOTORColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="NIVELSERVICO" msprop:Generator_UserColumnName="NIVELSERVICO" msprop:Generator_ColumnPropNameInRow="NIVELSERVICO" msprop:Generator_ColumnVarNameInTable="columnNIVELSERVICO" msprop:Generator_ColumnPropNameInTable="NIVELSERVICOColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="CAPACIDADPAS" msprop:Generator_UserColumnName="CAPACIDADPAS" msprop:Generator_ColumnPropNameInRow="CAPACIDADPAS" msprop:Generator_ColumnVarNameInTable="columnCAPACIDADPAS" msprop:Generator_ColumnPropNameInTable="CAPACIDADPASColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="CAPACIDADTON" msprop:Generator_UserColumnName="CAPACIDADTON" msprop:Generator_ColumnPropNameInRow="CAPACIDADTON" msprop:Generator_ColumnVarNameInTable="columnCAPACIDADTON" msprop:Generator_ColumnPropNameInTable="CAPACIDADTONColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="RAZONSOCIAL" msprop:Generator_UserColumnName="RAZONSOCIAL" msprop:Generator_ColumnPropNameInRow="RAZONSOCIAL" msprop:Generator_ColumnVarNameInTable="columnRAZONSOCIAL" msprop:Generator_ColumnPropNameInTable="RAZONSOCIALColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="RADIOACCION" msprop:Generator_UserColumnName="RADIOACCION" msprop:Generator_ColumnPropNameInRow="RADIOACCION" msprop:Generator_ColumnVarNameInTable="columnRADIOACCION" msprop:Generator_ColumnPropNameInTable="RADIOACCIONColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ZONAOPERACION" msprop:Generator_UserColumnName="ZONAOPERACION" msprop:Generator_ColumnPropNameInRow="ZONAOPERACION" msprop:Generator_ColumnVarNameInTable="columnZONAOPERACION" msprop:Generator_ColumnPropNameInTable="ZONAOPERACIONColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="NROTARJETA" msprop:Generator_UserColumnName="NROTARJETA" msprop:Generator_ColumnPropNameInRow="NROTARJETA" msprop:Generator_ColumnVarNameInTable="columnNROTARJETA" msprop:Generator_ColumnPropNameInTable="NROTARJETAColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="CLASEVEHICULO" msprop:Generator_UserColumnName="CLASEVEHICULO" msprop:Generator_ColumnPropNameInRow="CLASEVEHICULO" msprop:Generator_ColumnVarNameInTable="columnCLASEVEHICULO" msprop:Generator_ColumnPropNameInTable="CLASEVEHICULOColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,60 @@
+[OPTIONS]
+Language=0x409 English (United States)
+Default Font=Arial,8,0
+TITLE=Transporte Publico
+Full-text search=Yes
+Display compile notes=YES
+Display compile progress=YES
+Compatibility=1.1
+Auto Index=Yes
+Default Window=Main
+Compiled file=transporte-publico.chm
+Error Log file=transporte-publico.log
+Contents file=transporte-publico.hhc
+Index File=transporte-publico.hhk
+Default Topic=GettingStarted.html
+
+[FILES]
+GettingStarted.html
+ContactingUs.html
+administracion.html
+roles.html
+gestion-de-usuarios.html
+mi-perfil.html
+gestion-de-plantillas.html
+crear.html
+editar.html
+acerca-de-gestion-cupos.html
+rango-de-cupos.html
+rango-por-empresa.html
+registrar-cupos.html
+editar-cupo.html
+acerca-de-transporte.html
+cambio-de-empresa.html
+generar-concepto-favorable.html
+desvinculacion-por-cambio-de-servicio.html
+desvinculacion-por-comun-acuerdo.html
+acerca-de-reportes.html
+vehiculos-activos-por-empresa-de-transporte.html
+generales.html
+acerca-de-plantillas.html
+faq.html
+
+
+
+
+[WINDOWS]
+Main="Transporte Publico","transporte-publico.hhc","transporte-publico.hhk","GettingStarted.html","GettingStarted.html",,,,,0x61520,200,0x384e,[50,50,450,450],0x307e,,,,,,0
+Popup="Popup","transporte-publico.hhc","transporte-publico.hhk","GettingStarted.html","GettingStarted.html", ,,,,0x00061520,200, 0x0000384E,[50,50,450,450],0x307e,0x8,,,,,0
+
+
+[MAP]
+#include transporte-publico.h
+
+
+
+[TEXT POPUPS]
+CSHelp.txt
+
+ 
+

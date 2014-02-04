@@ -1,0 +1,46 @@
+<03/02/2014 02:59:08 p.m.--#> Inicia aplicacion <#--03/02/2014 02:59:08 p.m.>
+
+<03/02/2014 02:59:13 p.m.--#> Cancelación de ingreso a la aplicación por petición del usuario <#--03/02/2014 02:59:13 p.m.>
+
+<03/02/2014 03:04:45 p.m.--#> Inicia aplicacion <#--03/02/2014 03:04:45 p.m.>
+
+<03/02/2014 03:05:00 p.m.--#> Ingreso como usuario ID: 215 <#--03/02/2014 03:05:00 p.m.>
+
+<03/02/2014 03:05:21 p.m.--#> Cierre de aplicación <#--03/02/2014 03:05:21 p.m.>
+
+<03/02/2014 03:05:24 p.m.--#> Inicia aplicacion <#--03/02/2014 03:05:24 p.m.>
+
+<03/02/2014 03:05:39 p.m.--#> Ingreso como usuario ID: 215 <#--03/02/2014 03:05:39 p.m.>
+
+<03/02/2014 03:07:30 p.m.--#> Cierre de aplicación <#--03/02/2014 03:07:30 p.m.>
+
+<03/02/2014 03:23:48 p.m.--#> Inicia aplicacion <#--03/02/2014 03:23:48 p.m.>
+
+<03/02/2014 03:24:03 p.m.--#> Ingreso como usuario ID: 215 <#--03/02/2014 03:24:03 p.m.>
+
+<03/02/2014 03:24:38 p.m.--#> Cierre de aplicación <#--03/02/2014 03:24:38 p.m.>
+
+<03/02/2014 03:58:16 p.m.--#> Inicia aplicacion <#--03/02/2014 03:58:16 p.m.>
+
+<03/02/2014 03:58:34 p.m.--#> Ingreso como usuario ID: 215 <#--03/02/2014 03:58:34 p.m.>
+
+<03/02/2014 04:01:39 p.m.--#> Inicia aplicacion <#--03/02/2014 04:01:39 p.m.>
+
+<03/02/2014 04:01:56 p.m.--#> Ingreso como usuario ID: 215 <#--03/02/2014 04:01:56 p.m.>
+
+<03/02/2014 04:02:13 p.m.--#> Error: System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en LibreriasSintrat.utilidades.Funciones.ToDataTable(ArrayList alist) en D:\Desarrollo\Repositorio\ServiciosIntegrales\LibreriasSintratMEDELLIN\LibreriasSintrat\utilidades\Funciones.cs:línea 1455
+   en TransportePublico.servicios.vehiculos.frmVehiculosActivosEmpresa.mostrarVehiculos(Object[] lista) en D:\Desarrollo\Repositorio\ServiciosIntegrales\TransportePublico\TransportePublico\servicios\vehiculos\frmVehiculosActivosEmpresa.cs:línea 190 -||- Ubicacion error:TransportePublico.servicios.vehiculos.frmVehiculosActivosEmpresa <#--03/02/2014 04:02:13 p.m.>
+
+<03/02/2014 04:02:42 p.m.--#> Error: System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en LibreriasSintrat.utilidades.Funciones.ToDataTable(ArrayList alist) en D:\Desarrollo\Repositorio\ServiciosIntegrales\LibreriasSintratMEDELLIN\LibreriasSintrat\utilidades\Funciones.cs:línea 1455
+   en TransportePublico.servicios.vehiculos.frmVehiculosActivosEmpresa.mostrarVehiculos(Object[] lista) en D:\Desarrollo\Repositorio\ServiciosIntegrales\TransportePublico\TransportePublico\servicios\vehiculos\frmVehiculosActivosEmpresa.cs:línea 190 -||- Ubicacion error:TransportePublico.servicios.vehiculos.frmVehiculosActivosEmpresa <#--03/02/2014 04:02:42 p.m.>
+
+<03/02/2014 04:03:53 p.m.--#> Error: System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en LibreriasSintrat.utilidades.Funciones.ToDataTable(ArrayList alist) en D:\Desarrollo\Repositorio\ServiciosIntegrales\LibreriasSintratMEDELLIN\LibreriasSintrat\utilidades\Funciones.cs:línea 1455
+   en TransportePublico.servicios.vehiculos.frmVehiculosActivosEmpresa.mostrarVehiculos(Object[] lista) en D:\Desarrollo\Repositorio\ServiciosIntegrales\TransportePublico\TransportePublico\servicios\vehiculos\frmVehiculosActivosEmpresa.cs:línea 190 -||- Ubicacion error:TransportePublico.servicios.vehiculos.frmVehiculosActivosEmpresa <#--03/02/2014 04:03:53 p.m.>
+
+<03/02/2014 04:14:04 p.m.--#> Inicia aplicacion <#--03/02/2014 04:14:04 p.m.>
+
+<03/02/2014 04:14:22 p.m.--#> Ingreso como usuario ID: 215 <#--03/02/2014 04:14:22 p.m.>
+

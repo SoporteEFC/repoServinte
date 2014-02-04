@@ -1,0 +1,61 @@
+Inicia aplicacion
+No se pudo encontrar el archivo 'C:\Users\FREYMAM\Documents\S&P\Desarrollo\TransportePublico\TransportePublico\bin\Debug\configure.ini'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   en System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize)
+   en System.IO.StreamReader..ctor(String path)
+   en GestionConfiguracion.ConsultarValor(String nombreArchivo, ClaveIni clave) en C:\Users\FREYMAM\Documents\S&P\Desarrollo\TransportePublico\TransportePublico\utilidades\configuracionIni\GestionConfiguracion.cs:línea 22
+   en TransportePublico.utilidades.FrmCargarWS.ConfgurarWSRemote() en C:\Users\FREYMAM\Documents\S&P\Desarrollo\TransportePublico\TransportePublico\utilidades\FrmCargarWS.cs:línea 136
+   en TransportePublico.Program.Main() en C:\Users\FREYMAM\Documents\S&P\Desarrollo\TransportePublico\TransportePublico\Program.cs:línea 28
+
+java.lang.NullPointerException
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   en TransportePublico.ServiciosCuposTrans.ServiciosCuposTransService.getOneCuposTaxis(cuposTaxisTrans arg0) en C:\Users\FREYMAM\Documents\S&P\Desarrollo\TransportePublico\TransportePublico\Web References\ServiciosCuposTrans\Reference.cs:línea 1236
+   en TransportePublico.servicios.tramites.tarjetadeoperacion.buscarVehiculo() en C:\Users\FREYMAM\Documents\S&P\Desarrollo\TransportePublico\TransportePublico\servicios\tramites\tarjetadeoperacion.cs:línea 55
+   en TransportePublico.servicios.tramites.tarjetadeoperacion.btnbuscar_Click(Object sender, EventArgs e) en C:\Users\FREYMAM\Documents\S&P\Desarrollo\TransportePublico\TransportePublico\servicios\tramites\tarjetadeoperacion.cs:línea 134
+   en System.Windows.Forms.Control.OnClick(EventArgs e)
+   en System.Windows.Forms.Button.OnClick(EventArgs e)
+   en System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   en System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   en System.Windows.Forms.Control.WndProc(Message& m)
+   en System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   en System.Windows.Forms.Button.WndProc(Message& m)
+   en System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   en System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   en System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   en System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   en System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Application.Run(Form mainForm)
+   en TransportePublico.Program.Main() en C:\Users\FREYMAM\Documents\S&P\Desarrollo\TransportePublico\TransportePublico\Program.cs:línea 41
+Termina aplicacion
+Inicia aplicacion
+
+java.lang.NullPointerException
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   en TransportePublico.ServiciosCuposTrans.ServiciosCuposTransService.getOneCuposTaxis(cuposTaxisTrans arg0) en C:\Users\FREYMAM\Documents\S&P\Desarrollo\TransportePublico\TransportePublico\Web References\ServiciosCuposTrans\Reference.cs:línea 1236
+   en TransportePublico.servicios.tramites.tarjetadeoperacion.buscarVehiculo() en C:\Users\FREYMAM\Documents\S&P\Desarrollo\TransportePublico\TransportePublico\servicios\tramites\tarjetadeoperacion.cs:línea 55
+   en TransportePublico.servicios.tramites.tarjetadeoperacion.btnbuscar_Click(Object sender, EventArgs e) en C:\Users\FREYMAM\Documents\S&P\Desarrollo\TransportePublico\TransportePublico\servicios\tramites\tarjetadeoperacion.cs:línea 134
+   en System.Windows.Forms.Control.OnClick(EventArgs e)
+   en System.Windows.Forms.Button.OnClick(EventArgs e)
+   en System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   en System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   en System.Windows.Forms.Control.WndProc(Message& m)
+   en System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   en System.Windows.Forms.Button.WndProc(Message& m)
+   en System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   en System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   en System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   en System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   en System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Application.Run(Form mainForm)
+   en TransportePublico.Program.Main() en C:\Users\FREYMAM\Documents\S&P\Desarrollo\TransportePublico\TransportePublico\Program.cs:línea 41
+Termina aplicacion
+Inicia aplicacion
+Termina aplicacion

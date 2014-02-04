@@ -1,0 +1,385 @@
+﻿namespace TransportePublico
+{
+    partial class FPrincipal
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.administracionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.confuguracionDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rolesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.configuraciónDeDocumentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestiónDePlantillasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.empresasDeServicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestiónPersonasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestiónDeCuposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registrarCuposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editarCuposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestiónDeCuposToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestiónDeCuposToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.transporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cambioDeEmpresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generarConceptoFavorableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.desvinculaciónPorCambioDeServicioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.desvinculaciónPorComúnAcuerdoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vehículosActivosPorEmpresaDeTransporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inventarioDeCuposToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rangosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.plantillasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tarjetaDeOperaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generadorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generarCertificadoDeInformaciónVehículoDeTransportePúblicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.administracionToolStripMenuItem,
+            this.gestiónDeCuposToolStripMenuItem,
+            this.transporteToolStripMenuItem,
+            this.informesToolStripMenuItem,
+            this.plantillasToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.menuStrip1.Size = new System.Drawing.Size(913, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // administracionToolStripMenuItem
+            // 
+            this.administracionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.confuguracionDeUsuariosToolStripMenuItem,
+            this.configuraciónDeDocumentosToolStripMenuItem,
+            this.empresasDeServicioToolStripMenuItem,
+            this.gestiónPersonasToolStripMenuItem});
+            this.administracionToolStripMenuItem.Image = global::TransportePublico.Properties.Resources.cogs;
+            this.administracionToolStripMenuItem.Name = "administracionToolStripMenuItem";
+            this.administracionToolStripMenuItem.Size = new System.Drawing.Size(107, 20);
+            this.administracionToolStripMenuItem.Text = "Administracion";
+            this.administracionToolStripMenuItem.Click += new System.EventHandler(this.administracionToolStripMenuItem_Click);
+            // 
+            // confuguracionDeUsuariosToolStripMenuItem
+            // 
+            this.confuguracionDeUsuariosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rolesToolStripMenuItem,
+            this.usuariosToolStripMenuItem,
+            this.usuarioToolStripMenuItem});
+            this.confuguracionDeUsuariosToolStripMenuItem.Image = global::TransportePublico.Properties.Resources.users;
+            this.confuguracionDeUsuariosToolStripMenuItem.Name = "confuguracionDeUsuariosToolStripMenuItem";
+            this.confuguracionDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.confuguracionDeUsuariosToolStripMenuItem.Text = "Configuracion de Usuarios";
+            // 
+            // rolesToolStripMenuItem
+            // 
+            this.rolesToolStripMenuItem.Image = global::TransportePublico.Properties.Resources.user2;
+            this.rolesToolStripMenuItem.Name = "rolesToolStripMenuItem";
+            this.rolesToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.rolesToolStripMenuItem.Text = "Roles";
+            this.rolesToolStripMenuItem.Click += new System.EventHandler(this.rolesToolStripMenuItem_Click);
+            // 
+            // usuariosToolStripMenuItem
+            // 
+            this.usuariosToolStripMenuItem.Image = global::TransportePublico.Properties.Resources.users;
+            this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.usuariosToolStripMenuItem.Text = "Gestion de Usuarios";
+            this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
+            // 
+            // usuarioToolStripMenuItem
+            // 
+            this.usuarioToolStripMenuItem.Image = global::TransportePublico.Properties.Resources.user;
+            this.usuarioToolStripMenuItem.Name = "usuarioToolStripMenuItem";
+            this.usuarioToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.usuarioToolStripMenuItem.Text = "Mi Cuenta";
+            this.usuarioToolStripMenuItem.Click += new System.EventHandler(this.usuarioToolStripMenuItem_Click);
+            // 
+            // configuraciónDeDocumentosToolStripMenuItem
+            // 
+            this.configuraciónDeDocumentosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gestiónDePlantillasToolStripMenuItem});
+            this.configuraciónDeDocumentosToolStripMenuItem.Image = global::TransportePublico.Properties.Resources.file;
+            this.configuraciónDeDocumentosToolStripMenuItem.Name = "configuraciónDeDocumentosToolStripMenuItem";
+            this.configuraciónDeDocumentosToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.configuraciónDeDocumentosToolStripMenuItem.Text = "Configuración de Documentos";
+            // 
+            // gestiónDePlantillasToolStripMenuItem
+            // 
+            this.gestiónDePlantillasToolStripMenuItem.Image = global::TransportePublico.Properties.Resources.signup;
+            this.gestiónDePlantillasToolStripMenuItem.Name = "gestiónDePlantillasToolStripMenuItem";
+            this.gestiónDePlantillasToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.gestiónDePlantillasToolStripMenuItem.Text = "Gestión de Plantillas";
+            this.gestiónDePlantillasToolStripMenuItem.Click += new System.EventHandler(this.gestiónDePlantillasToolStripMenuItem_Click);
+            // 
+            // empresasDeServicioToolStripMenuItem
+            // 
+            this.empresasDeServicioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.crearToolStripMenuItem,
+            this.editarToolStripMenuItem});
+            this.empresasDeServicioToolStripMenuItem.Name = "empresasDeServicioToolStripMenuItem";
+            this.empresasDeServicioToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.empresasDeServicioToolStripMenuItem.Text = "Empresas de servicio";
+            this.empresasDeServicioToolStripMenuItem.Click += new System.EventHandler(this.empresasDeServicioToolStripMenuItem_Click);
+            // 
+            // crearToolStripMenuItem
+            // 
+            this.crearToolStripMenuItem.Name = "crearToolStripMenuItem";
+            this.crearToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.crearToolStripMenuItem.Text = "Crear";
+            this.crearToolStripMenuItem.Click += new System.EventHandler(this.crearToolStripMenuItem_Click);
+            // 
+            // editarToolStripMenuItem
+            // 
+            this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
+            this.editarToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.editarToolStripMenuItem.Text = "Editar";
+            this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
+            // 
+            // gestiónPersonasToolStripMenuItem
+            // 
+            this.gestiónPersonasToolStripMenuItem.Name = "gestiónPersonasToolStripMenuItem";
+            this.gestiónPersonasToolStripMenuItem.Size = new System.Drawing.Size(215, 22);
+            this.gestiónPersonasToolStripMenuItem.Text = "Gestión Personas";
+            this.gestiónPersonasToolStripMenuItem.Click += new System.EventHandler(this.gestiónPersonasToolStripMenuItem_Click);
+            // 
+            // gestiónDeCuposToolStripMenuItem
+            // 
+            this.gestiónDeCuposToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.registrarCuposToolStripMenuItem,
+            this.editarCuposToolStripMenuItem,
+            this.gestiónDeCuposToolStripMenuItem2,
+            this.gestiónDeCuposToolStripMenuItem1});
+            this.gestiónDeCuposToolStripMenuItem.Name = "gestiónDeCuposToolStripMenuItem";
+            this.gestiónDeCuposToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.gestiónDeCuposToolStripMenuItem.Text = "Gestión de Cupos";
+            // 
+            // registrarCuposToolStripMenuItem
+            // 
+            this.registrarCuposToolStripMenuItem.Name = "registrarCuposToolStripMenuItem";
+            this.registrarCuposToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.registrarCuposToolStripMenuItem.Text = "Rango de Cupos";
+            this.registrarCuposToolStripMenuItem.Click += new System.EventHandler(this.registrarCuposToolStripMenuItem_Click);
+            // 
+            // editarCuposToolStripMenuItem
+            // 
+            this.editarCuposToolStripMenuItem.Name = "editarCuposToolStripMenuItem";
+            this.editarCuposToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.editarCuposToolStripMenuItem.Text = "Rangos por Empresa";
+            this.editarCuposToolStripMenuItem.Click += new System.EventHandler(this.editarCuposToolStripMenuItem_Click);
+            // 
+            // gestiónDeCuposToolStripMenuItem2
+            // 
+            this.gestiónDeCuposToolStripMenuItem2.Name = "gestiónDeCuposToolStripMenuItem2";
+            this.gestiónDeCuposToolStripMenuItem2.Size = new System.Drawing.Size(169, 22);
+            this.gestiónDeCuposToolStripMenuItem2.Text = "Registrar Cupos";
+            this.gestiónDeCuposToolStripMenuItem2.Click += new System.EventHandler(this.gestiónDeCuposToolStripMenuItem2_Click);
+            // 
+            // gestiónDeCuposToolStripMenuItem1
+            // 
+            this.gestiónDeCuposToolStripMenuItem1.Name = "gestiónDeCuposToolStripMenuItem1";
+            this.gestiónDeCuposToolStripMenuItem1.Size = new System.Drawing.Size(169, 22);
+            this.gestiónDeCuposToolStripMenuItem1.Text = "Editar Cupos";
+            this.gestiónDeCuposToolStripMenuItem1.Click += new System.EventHandler(this.gestiónDeCuposToolStripMenuItem1_Click);
+            // 
+            // transporteToolStripMenuItem
+            // 
+            this.transporteToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cambioDeEmpresaToolStripMenuItem,
+            this.generarConceptoFavorableToolStripMenuItem,
+            this.desvinculaciónPorCambioDeServicioToolStripMenuItem,
+            this.desvinculaciónPorComúnAcuerdoToolStripMenuItem});
+            this.transporteToolStripMenuItem.Name = "transporteToolStripMenuItem";
+            this.transporteToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
+            this.transporteToolStripMenuItem.Text = "Resoluciones";
+            // 
+            // cambioDeEmpresaToolStripMenuItem
+            // 
+            this.cambioDeEmpresaToolStripMenuItem.Name = "cambioDeEmpresaToolStripMenuItem";
+            this.cambioDeEmpresaToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.cambioDeEmpresaToolStripMenuItem.Text = "Cambio de Empresa";
+            this.cambioDeEmpresaToolStripMenuItem.Click += new System.EventHandler(this.cambioDeEmpresaToolStripMenuItem_Click);
+            // 
+            // generarConceptoFavorableToolStripMenuItem
+            // 
+            this.generarConceptoFavorableToolStripMenuItem.Name = "generarConceptoFavorableToolStripMenuItem";
+            this.generarConceptoFavorableToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.generarConceptoFavorableToolStripMenuItem.Text = "Generar Concepto Favorable";
+            this.generarConceptoFavorableToolStripMenuItem.Click += new System.EventHandler(this.generarConceptoFavorableToolStripMenuItem_Click);
+            // 
+            // desvinculaciónPorCambioDeServicioToolStripMenuItem
+            // 
+            this.desvinculaciónPorCambioDeServicioToolStripMenuItem.Name = "desvinculaciónPorCambioDeServicioToolStripMenuItem";
+            this.desvinculaciónPorCambioDeServicioToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.desvinculaciónPorCambioDeServicioToolStripMenuItem.Text = "Desvinculación por Cambio de Servicio";
+            this.desvinculaciónPorCambioDeServicioToolStripMenuItem.Click += new System.EventHandler(this.desvinculaciónPorCambioDeServicioToolStripMenuItem_Click);
+            // 
+            // desvinculaciónPorComúnAcuerdoToolStripMenuItem
+            // 
+            this.desvinculaciónPorComúnAcuerdoToolStripMenuItem.Name = "desvinculaciónPorComúnAcuerdoToolStripMenuItem";
+            this.desvinculaciónPorComúnAcuerdoToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.desvinculaciónPorComúnAcuerdoToolStripMenuItem.Text = "Desvinculación por Común Acuerdo";
+            this.desvinculaciónPorComúnAcuerdoToolStripMenuItem.Click += new System.EventHandler(this.desvinculaciónPorComúnAcuerdoToolStripMenuItem_Click);
+            // 
+            // informesToolStripMenuItem
+            // 
+            this.informesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.vehículosActivosPorEmpresaDeTransporteToolStripMenuItem,
+            this.generalesToolStripMenuItem,
+            this.inventarioDeCuposToolStripMenuItem1,
+            this.rangosToolStripMenuItem,
+            this.generarCertificadoDeInformaciónVehículoDeTransportePúblicoToolStripMenuItem});
+            this.informesToolStripMenuItem.Image = global::TransportePublico.Properties.Resources.file_powerpoint;
+            this.informesToolStripMenuItem.Name = "informesToolStripMenuItem";
+            this.informesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.informesToolStripMenuItem.Text = "Reportes";
+            // 
+            // vehículosActivosPorEmpresaDeTransporteToolStripMenuItem
+            // 
+            this.vehículosActivosPorEmpresaDeTransporteToolStripMenuItem.Image = global::TransportePublico.Properties.Resources.truck;
+            this.vehículosActivosPorEmpresaDeTransporteToolStripMenuItem.Name = "vehículosActivosPorEmpresaDeTransporteToolStripMenuItem";
+            this.vehículosActivosPorEmpresaDeTransporteToolStripMenuItem.Size = new System.Drawing.Size(384, 22);
+            this.vehículosActivosPorEmpresaDeTransporteToolStripMenuItem.Text = "Vehículos Activos por Empresa de Transporte";
+            this.vehículosActivosPorEmpresaDeTransporteToolStripMenuItem.Click += new System.EventHandler(this.vehículosActivosPorEmpresaDeTransporteToolStripMenuItem_Click);
+            // 
+            // generalesToolStripMenuItem
+            // 
+            this.generalesToolStripMenuItem.Name = "generalesToolStripMenuItem";
+            this.generalesToolStripMenuItem.Size = new System.Drawing.Size(384, 22);
+            this.generalesToolStripMenuItem.Text = "Generales";
+            this.generalesToolStripMenuItem.Click += new System.EventHandler(this.generalesToolStripMenuItem_Click);
+            // 
+            // inventarioDeCuposToolStripMenuItem1
+            // 
+            this.inventarioDeCuposToolStripMenuItem1.Name = "inventarioDeCuposToolStripMenuItem1";
+            this.inventarioDeCuposToolStripMenuItem1.Size = new System.Drawing.Size(384, 22);
+            this.inventarioDeCuposToolStripMenuItem1.Text = "Inventario de cupos";
+            this.inventarioDeCuposToolStripMenuItem1.Click += new System.EventHandler(this.inventarioDeCuposToolStripMenuItem1_Click);
+            // 
+            // rangosToolStripMenuItem
+            // 
+            this.rangosToolStripMenuItem.Name = "rangosToolStripMenuItem";
+            this.rangosToolStripMenuItem.Size = new System.Drawing.Size(384, 22);
+            this.rangosToolStripMenuItem.Text = "Rangos";
+            this.rangosToolStripMenuItem.Click += new System.EventHandler(this.rangosToolStripMenuItem_Click);
+            // 
+            // plantillasToolStripMenuItem
+            // 
+            this.plantillasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tarjetaDeOperaciónToolStripMenuItem});
+            this.plantillasToolStripMenuItem.Image = global::TransportePublico.Properties.Resources.signup;
+            this.plantillasToolStripMenuItem.Name = "plantillasToolStripMenuItem";
+            this.plantillasToolStripMenuItem.Size = new System.Drawing.Size(80, 20);
+            this.plantillasToolStripMenuItem.Text = "Sustratos";
+            // 
+            // tarjetaDeOperaciónToolStripMenuItem
+            // 
+            this.tarjetaDeOperaciónToolStripMenuItem.Image = global::TransportePublico.Properties.Resources.newspaper;
+            this.tarjetaDeOperaciónToolStripMenuItem.Name = "tarjetaDeOperaciónToolStripMenuItem";
+            this.tarjetaDeOperaciónToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.tarjetaDeOperaciónToolStripMenuItem.Text = "Tarjeta de Operación";
+            this.tarjetaDeOperaciónToolStripMenuItem.Click += new System.EventHandler(this.tarjetaDeOperaciónToolStripMenuItem_Click);
+            // 
+            // generadorToolStripMenuItem
+            // 
+            this.generadorToolStripMenuItem.Name = "generadorToolStripMenuItem";
+            this.generadorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generadorToolStripMenuItem.Text = "Generador";
+            // 
+            // generarCertificadoDeInformaciónVehículoDeTransportePúblicoToolStripMenuItem
+            // 
+            this.generarCertificadoDeInformaciónVehículoDeTransportePúblicoToolStripMenuItem.Name = "generarCertificadoDeInformaciónVehículoDeTransportePúblicoToolStripMenuItem";
+            this.generarCertificadoDeInformaciónVehículoDeTransportePúblicoToolStripMenuItem.Size = new System.Drawing.Size(384, 22);
+            this.generarCertificadoDeInformaciónVehículoDeTransportePúblicoToolStripMenuItem.Text = "Generar certificado de información vehículo de transporte público";
+            this.generarCertificadoDeInformaciónVehículoDeTransportePúblicoToolStripMenuItem.Click += new System.EventHandler(this.generarCertificadoDeInformaciónVehículoDeTransportePúblicoToolStripMenuItem_Click);
+            // 
+            // FPrincipal
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = global::TransportePublico.Properties.Resources.SIATT;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ClientSize = new System.Drawing.Size(913, 478);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Name = "FPrincipal";
+            this.ShowIcon = false;
+            this.Text = "Bienvenidos Sistema de Transporte Público";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.FPrincipal_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        
+
+        #endregion
+
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem administracionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem confuguracionDeUsuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem rolesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usuarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generadorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestiónDeCuposToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem transporteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cambioDeEmpresaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registrarCuposToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editarCuposToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestiónDeCuposToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem gestiónDeCuposToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem generarConceptoFavorableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem desvinculaciónPorCambioDeServicioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem desvinculaciónPorComúnAcuerdoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem configuraciónDeDocumentosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestiónDePlantillasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem informesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vehículosActivosPorEmpresaDeTransporteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generalesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem plantillasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tarjetaDeOperaciónToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem empresasDeServicioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inventarioDeCuposToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem rangosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem crearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestiónPersonasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generarCertificadoDeInformaciónVehículoDeTransportePúblicoToolStripMenuItem;
+    }
+}

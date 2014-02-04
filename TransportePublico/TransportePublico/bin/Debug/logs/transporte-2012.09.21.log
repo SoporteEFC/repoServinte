@@ -1,0 +1,114 @@
+Inicia aplicacion
+Termina aplicacion
+Inicia aplicacion
+Termina aplicacion
+Inicia aplicacion
+Termina aplicacion
+Inicia aplicacion
+Termina aplicacion
+Inicia aplicacion
+Termina aplicacion
+Inicia aplicacion
+Termina aplicacion
+Inicia aplicacion
+System.Net.Sockets.SocketException: Se produjo un error durante el intento de conexión ya que la parte conectada no respondió adecuadamente tras un periodo de tiempo, o bien se produjo un error en la conexión establecida ya que el host conectado no ha podido responder 192.168.1.129:8080
+   en System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   en System.Net.ServicePoint.ConnectSocketInternal(Boolean connectFailure, Socket s4, Socket s6, Socket& socket, IPAddress& address, ConnectSocketState state, IAsyncResult asyncResult, Int32 timeout, Exception& exception)
+No es posible conectar con el servidor remoto
+   en System.Net.HttpWebRequest.GetRequestStream(TransportContext& context)
+   en System.Net.HttpWebRequest.GetRequestStream()
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   en TransportePublico.ServiciosUsuarios.ServiciosUsuariosService.getUsuarios(usuarios arg0) en D:\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\Web References\ServiciosUsuarios\Reference.cs:línea 227
+   en TransportePublico.RecuperarContrasena.btnIniciar_Click(Object sender, EventArgs e) en D:\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\RecuperarContrasena.cs:línea 39
+   en System.Windows.Forms.Control.OnClick(EventArgs e)
+   en System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   en System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   en System.Windows.Forms.Control.WndProc(Message& m)
+   en System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   en System.Windows.Forms.Button.WndProc(Message& m)
+   en System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   en System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   en System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   en System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   en TransportePublico.Program.Main() en D:\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\Program.cs:línea 37
+Termina aplicacion
+Inicia aplicacion
+Termina aplicacion
+Inicia aplicacion
+
+Referencia a objeto no establecida como instancia de un objeto.
+   en TransportePublico.RecuperarContrasena.btnIniciar_Click(Object sender, EventArgs e) en D:\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\RecuperarContrasena.cs:línea 48
+   en System.Windows.Forms.Control.OnClick(EventArgs e)
+   en System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   en System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   en System.Windows.Forms.Control.WndProc(Message& m)
+   en System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   en System.Windows.Forms.Button.WndProc(Message& m)
+   en System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   en System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   en System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   en System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   en TransportePublico.Program.Main() en D:\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\Program.cs:línea 37
+Termina aplicacion
+Inicia aplicacion
+Termina aplicacion
+Inicia aplicacion
+
+Referencia a objeto no establecida como instancia de un objeto.
+   en TransportePublico.RecuperarContrasena.btnIniciar_Click(Object sender, EventArgs e) en D:\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\RecuperarContrasena.cs:línea 48
+   en System.Windows.Forms.Control.OnClick(EventArgs e)
+   en System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   en System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   en System.Windows.Forms.Control.WndProc(Message& m)
+   en System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   en System.Windows.Forms.Button.WndProc(Message& m)
+   en System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   en System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   en System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   en System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   en TransportePublico.Program.Main() en D:\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\Program.cs:línea 37
+Termina aplicacion
+Inicia aplicacion
+
+Referencia a objeto no establecida como instancia de un objeto.
+   en TransportePublico.RecuperarContrasena.btnIniciar_Click(Object sender, EventArgs e) en D:\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\RecuperarContrasena.cs:línea 48
+   en System.Windows.Forms.Control.OnClick(EventArgs e)
+   en System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   en System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   en System.Windows.Forms.Control.WndProc(Message& m)
+   en System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   en System.Windows.Forms.Button.WndProc(Message& m)
+   en System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   en System.Windows.Forms.NativeWindow.DebuggableCallback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+   en System.Windows.Forms.UnsafeNativeMethods.DispatchMessageW(MSG& msg)
+   en System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   en TransportePublico.Program.Main() en D:\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\Program.cs:línea 37
+Termina aplicacion
+Inicia aplicacion
+
+Referencia a objeto no establecida como instancia de un objeto.
+   en TransportePublico.RecuperarContrasena.btnIniciar_Click(Object sender, EventArgs e) en D:\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\RecuperarContrasena.cs:línea 48
+   en System.Windows.Forms.Control.OnClick(EventArgs e)
+   en System.Windows.Forms.Button.PerformClick()
+   en System.Windows.Forms.Form.ProcessDialogKey(Keys keyData)
+   en System.Windows.Forms.Control.PreProcessMessage(Message& msg)
+   en System.Windows.Forms.Control.PreProcessControlMessageInternal(Control target, Message& msg)
+   en System.Windows.Forms.Application.ThreadContext.PreTranslateMessage(MSG& msg)
+   en System.Windows.Forms.Application.ComponentManager.System.Windows.Forms.UnsafeNativeMethods.IMsoComponentManager.FPushMessageLoop(Int32 dwComponentID, Int32 reason, Int32 pvLoopData)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoopInner(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Application.ThreadContext.RunMessageLoop(Int32 reason, ApplicationContext context)
+   en System.Windows.Forms.Form.ShowDialog(IWin32Window owner)
+   en TransportePublico.Program.Main() en D:\Repositorio\TransitoCsharp\TransportePublico\TransportePublico\Program.cs:línea 37
+Termina aplicacion

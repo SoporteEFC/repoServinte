@@ -1,0 +1,748 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D44BA2D5-E486-4DED-9BB2-0AF5EEAE63FA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TransportePublico</RootNamespace>
+    <AssemblyName>TransportePublico</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\TransportePublico.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\TransportePublico.exe.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="itextsharp, Version=5.1.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\librerias\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="LibreriasSintrat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\LibreriasSintratMEDELLIN\LibreriasSintrat\bin\Release\LibreriasSintrat.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="Microsoft.Office.Interop.Word, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Principal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Principal.Designer.cs">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Principal.resx">
+      <DependentUpon>Principal.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\frmCertificadoInformacionVehiculo.resx">
+      <DependentUpon>frmCertificadoInformacionVehiculo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\FrmInventarioCupos.resx">
+      <DependentUpon>FrmInventarioCupos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\cupos\cuposporempresa.resx">
+      <DependentUpon>cuposporempresa.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\cupos\editarcupo.resx">
+      <DependentUpon>editarcupo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\cupos\gestioncupos.resx">
+      <DependentUpon>gestioncupos.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\cupos\inventariocupos.resx">
+      <DependentUpon>inventariocupos.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\cupos\ListarCupos.resx">
+      <DependentUpon>ListarCupos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\documentos\fPlantilla.resx">
+      <DependentUpon>fPlantilla.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\FrmEmpresaServicio.resx">
+      <DependentUpon>FrmEmpresaServicio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\FrmInventarioRango.resx">
+      <DependentUpon>FrmInventarioRango.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\reportes\generales\ReporteDocumentos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteDocumentos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\reportes\generales\ReportePropietarios.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportePropietarios.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\reportes\generales\ReporteTarjetas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteTarjetas.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\reportes\generales\VerReporteDocumentos.resx">
+      <DependentUpon>VerReporteDocumentos.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\reportes\generales\VerReportePropietarios.resx">
+      <DependentUpon>VerReportePropietarios.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\reportes\generales\VerReporteTarjetas.resx">
+      <DependentUpon>VerReporteTarjetas.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\reportes\tarjetaOperacion\ReporteTarjetaOperacion.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteTarjetaOperacion.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\reportes\vehiculosActivosporEmpresa\ReporteVehiculosActivos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReporteVehiculosActivos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\reportes\vehiculosActivosporEmpresa\VerReporteActivos.resx">
+      <DependentUpon>VerReporteActivos.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\reportes\vidaUtilVehiculo\reporteVidaUtil.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>reporteVidaUtil.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\reportes\vidaUtilVehiculo\VerReporteVidaUtil.resx">
+      <DependentUpon>VerReporteVidaUtil.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\tramites\cambiodeempresa.resx">
+      <DependentUpon>cambiodeempresa.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\tramites\configuracionresoluciones.resx">
+      <DependentUpon>configuracionresoluciones.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\tramites\desvinculacioncambiodeservicio.resx">
+      <DependentUpon>desvinculacioncambiodeservicio.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\tramites\desvporcomunacuerdo.resx">
+      <DependentUpon>desvporcomunacuerdo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\tramites\generarconceptofavorable.resx">
+      <DependentUpon>generarconceptofavorable.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\tramites\tarjetadeoperacion.resx">
+      <DependentUpon>tarjetadeoperacion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\tramites\trasladodecupos.resx">
+      <DependentUpon>trasladodecupos.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\vehiculos\frmVehiculosActivosEmpresa.resx">
+      <DependentUpon>frmVehiculosActivosEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\vehiculos\informesgenerales.resx">
+      <DependentUpon>informesgenerales.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\vehiculos\VerDatos.resx">
+      <DependentUpon>VerDatos.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\vehiculos\vidautilporvehiculo.resx">
+      <DependentUpon>vidautilporvehiculo.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="servicios\reportes\tarjetaOperacion\verReporteTarjetaOperacion.resx">
+      <DependentUpon>verReporteTarjetaOperacion.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="utilidades\configuracionIni\FrmConfigurarAplicacion.resx">
+      <DependentUpon>FrmConfigurarAplicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="utilidades\configuracionIni\FrmVisorLog.resx">
+      <DependentUpon>FrmVisorLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="bin\Debug\configure.ini" />
+    <None Include="bin\Debug\logs\transito-2012.12.15.log" />
+    <None Include="bin\Debug\logs\transito-2012.12.28.log" />
+    <None Include="bin\Debug\logs\transito-2013.01.02.log" />
+    <None Include="bin\Debug\TransportePublico.exe.config" />
+    <None Include="bin\Debug\TransportePublico.vshost.exe.config" />
+    <None Include="bin\Debug\TransportePublico.vshost.exe.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="servicios\reportes\generales\DatosDocumentos.xsc">
+      <DependentUpon>DatosDocumentos.xsd</DependentUpon>
+    </None>
+    <None Include="servicios\reportes\generales\DatosDocumentos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatosDocumentos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="servicios\reportes\generales\DatosDocumentos.xss">
+      <DependentUpon>DatosDocumentos.xsd</DependentUpon>
+    </None>
+    <None Include="servicios\reportes\generales\DatosPropietarios.xsc">
+      <DependentUpon>DatosPropietarios.xsd</DependentUpon>
+    </None>
+    <None Include="servicios\reportes\generales\DatosPropietarios.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatosPropietarios.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="servicios\reportes\generales\DatosPropietarios.xss">
+      <DependentUpon>DatosPropietarios.xsd</DependentUpon>
+    </None>
+    <None Include="servicios\reportes\generales\DatosTarjetas.xsc">
+      <DependentUpon>DatosTarjetas.xsd</DependentUpon>
+    </None>
+    <None Include="servicios\reportes\generales\DatosTarjetas.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatosTarjetas.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="servicios\reportes\generales\DatosTarjetas.xss">
+      <DependentUpon>DatosTarjetas.xsd</DependentUpon>
+    </None>
+    <None Include="servicios\reportes\tarjetaOperacion\DatosTarjetaOperacion.xsc">
+      <DependentUpon>DatosTarjetaOperacion.xsd</DependentUpon>
+    </None>
+    <None Include="servicios\reportes\tarjetaOperacion\DatosTarjetaOperacion.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatosTarjetaOperacion.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="servicios\reportes\tarjetaOperacion\DatosTarjetaOperacion.xss">
+      <DependentUpon>DatosTarjetaOperacion.xsd</DependentUpon>
+    </None>
+    <None Include="servicios\reportes\vehiculosActivosporEmpresa\DatosVehiculosActivos.xsc">
+      <DependentUpon>DatosVehiculosActivos.xsd</DependentUpon>
+    </None>
+    <None Include="servicios\reportes\vehiculosActivosporEmpresa\DatosVehiculosActivos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatosVehiculosActivos.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="servicios\reportes\vehiculosActivosporEmpresa\DatosVehiculosActivos.xss">
+      <DependentUpon>DatosVehiculosActivos.xsd</DependentUpon>
+    </None>
+    <None Include="servicios\reportes\vidaUtilVehiculo\DatosVidaUtil.xsc">
+      <DependentUpon>DatosVidaUtil.xsd</DependentUpon>
+    </None>
+    <None Include="servicios\reportes\vidaUtilVehiculo\DatosVidaUtil.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DatosVidaUtil.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="servicios\reportes\vidaUtilVehiculo\DatosVidaUtil.xss">
+      <DependentUpon>DatosVidaUtil.xsd</DependentUpon>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="servicios\frmCertificadoInformacionVehiculo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\frmCertificadoInformacionVehiculo.Designer.cs">
+      <DependentUpon>frmCertificadoInformacionVehiculo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\FrmInventarioCupos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\FrmInventarioCupos.Designer.cs">
+      <DependentUpon>FrmInventarioCupos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\cupos\cuposporempresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\cupos\cuposporempresa.Designer.cs">
+      <DependentUpon>cuposporempresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\cupos\editarcupo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\cupos\editarcupo.Designer.cs">
+      <DependentUpon>editarcupo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\cupos\gestioncupos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\cupos\gestioncupos.Designer.cs">
+      <DependentUpon>gestioncupos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\cupos\inventariocupos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\cupos\inventariocupos.Designer.cs">
+      <DependentUpon>inventariocupos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\cupos\ListarCupos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\cupos\ListarCupos.Designer.cs">
+      <DependentUpon>ListarCupos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\documentos\fPlantilla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\documentos\fPlantilla.designer.cs">
+      <DependentUpon>fPlantilla.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\documentos\plantillaAPDF.cs" />
+    <Compile Include="servicios\documentos\transferir.cs" />
+    <Compile Include="servicios\FrmEmpresaServicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\FrmEmpresaServicio.Designer.cs">
+      <DependentUpon>FrmEmpresaServicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\FrmInventarioRango.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\FrmInventarioRango.Designer.cs">
+      <DependentUpon>FrmInventarioRango.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\DatosDocumentos.cs">
+      <DependentUpon>DatosDocumentos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\DatosDocumentos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatosDocumentos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\DatosPropietarios.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatosPropietarios.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\DatosTarjetas.cs">
+      <DependentUpon>DatosTarjetas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\DatosTarjetas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatosTarjetas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\ReporteDocumentos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteDocumentos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\ReportePropietarios.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportePropietarios.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\ReporteTarjetas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteTarjetas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\VerReporteDocumentos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\VerReporteDocumentos.Designer.cs">
+      <DependentUpon>VerReporteDocumentos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\VerReportePropietarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\VerReportePropietarios.Designer.cs">
+      <DependentUpon>VerReportePropietarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\VerReporteTarjetas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\reportes\generales\VerReporteTarjetas.Designer.cs">
+      <DependentUpon>VerReporteTarjetas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\tarjetaOperacion\DatosTarjetaOperacion.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatosTarjetaOperacion.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\tarjetaOperacion\ReporteTarjetaOperacion.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteTarjetaOperacion.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="servicios\reportes\vehiculosActivosporEmpresa\DatosVehiculosActivos.cs">
+      <DependentUpon>DatosVehiculosActivos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\vehiculosActivosporEmpresa\DatosVehiculosActivos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatosVehiculosActivos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\vehiculosActivosporEmpresa\ReporteVehiculosActivos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReporteVehiculosActivos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="servicios\reportes\vehiculosActivosporEmpresa\VerReporteActivos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\reportes\vehiculosActivosporEmpresa\VerReporteActivos.Designer.cs">
+      <DependentUpon>VerReporteActivos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\vidaUtilVehiculo\DatosVidaUtil.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatosVidaUtil.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\vidaUtilVehiculo\reporteVidaUtil.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>reporteVidaUtil.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="servicios\reportes\vidaUtilVehiculo\VerReporteVidaUtil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\reportes\vidaUtilVehiculo\VerReporteVidaUtil.Designer.cs">
+      <DependentUpon>VerReporteVidaUtil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\tramites\cambiodeempresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\tramites\cambiodeempresa.Designer.cs">
+      <DependentUpon>cambiodeempresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\tramites\configuracionresoluciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\tramites\configuracionresoluciones.Designer.cs">
+      <DependentUpon>configuracionresoluciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\tramites\desvinculacioncambiodeservicio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\tramites\desvinculacioncambiodeservicio.Designer.cs">
+      <DependentUpon>desvinculacioncambiodeservicio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\tramites\desvporcomunacuerdo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\tramites\desvporcomunacuerdo.Designer.cs">
+      <DependentUpon>desvporcomunacuerdo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\tramites\generarconceptofavorable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\tramites\generarconceptofavorable.Designer.cs">
+      <DependentUpon>generarconceptofavorable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\tramites\tarjetadeoperacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\tramites\tarjetadeoperacion.Designer.cs">
+      <DependentUpon>tarjetadeoperacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\tramites\trasladodecupos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\tramites\trasladodecupos.Designer.cs">
+      <DependentUpon>trasladodecupos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\vehiculos\frmVehiculosActivosEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\vehiculos\frmVehiculosActivosEmpresa.Designer.cs">
+      <DependentUpon>frmVehiculosActivosEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\vehiculos\informesgenerales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\vehiculos\informesgenerales.Designer.cs">
+      <DependentUpon>informesgenerales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\vehiculos\VerDatos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\vehiculos\VerDatos.Designer.cs">
+      <DependentUpon>VerDatos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\vehiculos\vidautilporvehiculo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\vehiculos\vidautilporvehiculo.Designer.cs">
+      <DependentUpon>vidautilporvehiculo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="servicios\reportes\tarjetaOperacion\verReporteTarjetaOperacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="servicios\reportes\tarjetaOperacion\verReporteTarjetaOperacion.Designer.cs">
+      <DependentUpon>verReporteTarjetaOperacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="utilidades\configuracionIni\ClaveIni.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="utilidades\configuracionIni\FrmConfigurarAplicacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="utilidades\configuracionIni\FrmConfigurarAplicacion.designer.cs">
+      <DependentUpon>FrmConfigurarAplicacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="utilidades\configuracionIni\FrmVisorLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="utilidades\configuracionIni\FrmVisorLog.designer.cs">
+      <DependentUpon>FrmVisorLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="utilidades\configuracionIni\GestionArchivo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="utilidades\configuracionIni\GestionConfiguracion.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{967B4E0D-AD0C-4609-AB67-0FA40C0206D8}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\CrystalDecisions.CrystalReports.Engine.dll" />
+    <Content Include="bin\Debug\CrystalDecisions.ReportSource.dll" />
+    <Content Include="bin\Debug\CrystalDecisions.Shared.dll" />
+    <Content Include="bin\Debug\CrystalDecisions.Windows.Forms.dll" />
+    <Content Include="bin\Debug\itextsharp.dll" />
+    <Content Include="bin\Debug\LibreriasSintrat.pdb" />
+    <Content Include="bin\Debug\LibreriasSintrat.XmlSerializers.dll" />
+    <Content Include="bin\Debug\Microsoft.Office.Interop.Excel.dll" />
+    <Content Include="bin\Debug\Microsoft.Office.Interop.Excel.xml" />
+    <Content Include="bin\Debug\Microsoft.Office.Interop.Word.dll" />
+    <Content Include="bin\Debug\Microsoft.Office.Interop.Word.xml" />
+    <Content Include="bin\Debug\Microsoft.Vbe.Interop.dll" />
+    <Content Include="bin\Debug\office.dll" />
+    <Content Include="bin\Debug\office.xml" />
+    <Content Include="bin\Debug\TransportePublico.exe" />
+    <Content Include="bin\Debug\TransportePublico.pdb" />
+    <Content Include="bin\Debug\TransportePublico.vshost.exe" />
+    <Content Include="bin\Release\crdb_adoplus.dll" />
+    <None Include="Resources\aid.png" />
+    <None Include="Resources\arrow-up.png" />
+    <None Include="Resources\arrow-up-right.png" />
+    <None Include="Resources\at.png" />
+    <None Include="Resources\award-fill.png" />
+    <None Include="Resources\bars.png" />
+    <None Include="Resources\bell.png" />
+    <None Include="Resources\binoculars.png" />
+    <None Include="Resources\box-add.png" />
+    <None Include="Resources\bullhorn.png" />
+    <None Include="Resources\calculate.png" />
+    <None Include="Resources\cart.png" />
+    <Content Include="Resources\cerrar.bmp" />
+    <Content Include="Resources\cerrar2.bmp" />
+    <None Include="Resources\wrench.png" />
+    <None Include="Resources\users.png" />
+    <None Include="Resources\user2.png" />
+    <None Include="Resources\user.png" />
+    <None Include="Resources\upload.png" />
+    <None Include="Resources\undo.png" />
+    <None Include="Resources\truck.png" />
+    <None Include="Resources\stackoverflow.png" />
+    <None Include="Resources\spell-check.png" />
+    <None Include="Resources\signup.png" />
+    <None Include="Resources\shuffle.png" />
+    <None Include="Resources\search.png" />
+    <None Include="Resources\road.png" />
+    <None Include="Resources\remove.png" />
+    <None Include="Resources\redo.png" />
+    <None Include="Resources\quill.png" />
+    <None Include="Resources\question.png" />
+    <None Include="Resources\profile.png" />
+    <None Include="Resources\print.png" />
+    <None Include="Resources\previous.png" />
+    <None Include="Resources\point-up.png" />
+    <None Include="Resources\point-down.png" />
+    <None Include="Resources\plus.png" />
+    <None Include="Resources\pencil.png" />
+    <None Include="Resources\paperclip.png" />
+    <None Include="Resources\office.png" />
+    <None Include="Resources\next.png" />
+    <None Include="Resources\newspaper.png" />
+    <None Include="Resources\loop.png" />
+    <None Include="Resources\console.png" />
+    <None Include="Resources\download.png" />
+    <None Include="Resources\droplet.png" />
+    <None Include="Resources\exit.png" />
+    <None Include="Resources\eye.png" />
+    <None Include="Resources\file.png" />
+    <None Include="Resources\file-excel.png" />
+    <None Include="Resources\file-pdf.png" />
+    <None Include="Resources\file-powerpoint.png" />
+    <None Include="Resources\file-word.png" />
+    <None Include="Resources\filter.png" />
+    <None Include="Resources\first.png" />
+    <None Include="Resources\floppy.png" />
+    <None Include="Resources\hash.png" />
+    <None Include="Resources\history.png" />
+    <None Include="Resources\home.png" />
+    <None Include="Resources\image.png" />
+    <None Include="Resources\info.png" />
+    <None Include="Resources\last.png" />
+    <None Include="Resources\lightning.png" />
+    <None Include="Resources\list-nested.png" />
+    <None Include="Resources\checkbox-partial.png" />
+    <None Include="Resources\checkmark.png" />
+    <None Include="Resources\checkmark2.png" />
+    <None Include="Resources\close.png" />
+    <None Include="Resources\cogs.png" />
+    <None Include="Resources\coin.png" />
+    <Content Include="Resources\login_siatt_transportepublico.jpg" />
+    <Content Include="Resources\logueoSIntrat.jpg" />
+    <Content Include="Resources\logueoSIntrat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

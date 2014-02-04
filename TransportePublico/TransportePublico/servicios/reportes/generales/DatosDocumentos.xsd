@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DatosDocumentos" targetNamespace="http://tempuri.org/DatosDocumentos.xsd" xmlns:mstns="http://tempuri.org/DatosDocumentos.xsd" xmlns="http://tempuri.org/DatosDocumentos.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DatosDocumentos" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="DatosDocumentos" msprop:Generator_UserDSName="DatosDocumentos" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="TablaDocumentos" msprop:Generator_UserTableName="TablaDocumentos" msprop:Generator_RowDeletedName="TablaDocumentosRowDeleted" msprop:Generator_TableClassName="TablaDocumentosDataTable" msprop:Generator_RowChangedName="TablaDocumentosRowChanged" msprop:Generator_RowClassName="TablaDocumentosRow" msprop:Generator_RowChangingName="TablaDocumentosRowChanging" msprop:Generator_RowEvArgName="TablaDocumentosRowChangeEvent" msprop:Generator_RowEvHandlerName="TablaDocumentosRowChangeEventHandler" msprop:Generator_TablePropName="TablaDocumentos" msprop:Generator_TableVarName="tableTablaDocumentos" msprop:Generator_RowDeletingName="TablaDocumentosRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ADESCRIPCION" msprop:Generator_UserColumnName="ADESCRIPCION" msprop:Generator_ColumnPropNameInRow="ADESCRIPCION" msprop:Generator_ColumnVarNameInTable="columnADESCRIPCION" msprop:Generator_ColumnPropNameInTable="ADESCRIPCIONColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="NUMERORESOLUCION" msprop:Generator_UserColumnName="NUMERORESOLUCION" msprop:Generator_ColumnPropNameInRow="NUMERORESOLUCION" msprop:Generator_ColumnVarNameInTable="columnNUMERORESOLUCION" msprop:Generator_ColumnPropNameInTable="NUMERORESOLUCIONColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="FECHARESOLUCION" msprop:Generator_UserColumnName="FECHARESOLUCION" msprop:Generator_ColumnPropNameInRow="FECHARESOLUCION" msprop:Generator_ColumnVarNameInTable="columnFECHARESOLUCION" msprop:Generator_ColumnPropNameInTable="FECHARESOLUCIONColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="DFECHAREGISTRO" msprop:Generator_UserColumnName="DFECHAREGISTRO" msprop:Generator_ColumnPropNameInRow="DFECHAREGISTRO" msprop:Generator_ColumnVarNameInTable="columnDFECHAREGISTRO" msprop:Generator_ColumnPropNameInTable="DFECHAREGISTROColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

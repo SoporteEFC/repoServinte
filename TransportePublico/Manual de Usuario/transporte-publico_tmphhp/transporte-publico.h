@@ -1,0 +1,25 @@
+#define GettingStarted 30
+#define ContactingUs 50
+#define administracion 170
+#define roles 180
+#define gestion-de-usuarios 190
+#define mi-perfil 200
+#define gestion-de-plantillas 251
+#define crear 271
+#define editar 281
+#define acerca-de-gestion-cupos 261
+#define rango-de-cupos 291
+#define rango-por-empresa 311
+#define registrar-cupos 321
+#define editar-cupo 403
+#define acerca-de-transporte 373
+#define cambio-de-empresa 413
+#define generar-concepto-favorable 423
+#define desvinculacion-por-cambio-de-servicio 433
+#define desvinculacion-por-comun-acuerdo 453
+#define acerca-de-reportes 383
+#define vehiculos-activos-por-empresa-de-transporte 463
+#define generales 473
+#define acerca-de-plantillas 393
+#define faq 241
+

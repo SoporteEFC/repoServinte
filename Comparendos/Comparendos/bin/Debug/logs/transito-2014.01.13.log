@@ -1,0 +1,70 @@
+<13/01/2014 11:58:57 a.m.--#> Inicia aplicacion <#--13/01/2014 11:58:57 a.m.>
+
+<13/01/2014 11:59:25 a.m.--#> Cierre de aplicación <#--13/01/2014 11:59:25 a.m.>
+
+<13/01/2014 12:07:29 p.m.--#> Inicia aplicacion <#--13/01/2014 12:07:29 p.m.>
+
+<13/01/2014 12:07:56 p.m.--#> Cierre de aplicación <#--13/01/2014 12:07:56 p.m.>
+
+<13/01/2014 12:08:13 p.m.--#> Inicia aplicacion <#--13/01/2014 12:08:13 p.m.>
+
+<13/01/2014 12:14:45 p.m.--#> Inicia aplicacion <#--13/01/2014 12:14:45 p.m.>
+
+<13/01/2014 12:24:12 p.m.--#> Inicia aplicacion <#--13/01/2014 12:24:12 p.m.>
+
+<13/01/2014 02:43:45 p.m.--#> Inicia aplicacion <#--13/01/2014 02:43:45 p.m.>
+
+<13/01/2014 02:53:06 p.m.--#> Inicia aplicacion <#--13/01/2014 02:53:06 p.m.>
+
+<13/01/2014 02:54:44 p.m.--#> Cancelación de ingreso a la aplicación por petición del usuario <#--13/01/2014 02:54:44 p.m.>
+
+<13/01/2014 02:57:06 p.m.--#> Inicia aplicacion <#--13/01/2014 02:57:06 p.m.>
+
+<13/01/2014 02:58:24 p.m.--#> Cierre de aplicación <#--13/01/2014 02:58:24 p.m.>
+
+<13/01/2014 03:02:22 p.m.--#> Inicia aplicacion <#--13/01/2014 03:02:22 p.m.>
+
+<13/01/2014 03:35:26 p.m.--#> Inicia aplicacion <#--13/01/2014 03:35:26 p.m.>
+
+<13/01/2014 03:45:51 p.m.--#> Inicia aplicacion <#--13/01/2014 03:45:51 p.m.>
+
+<13/01/2014 03:51:37 p.m.--#> Error: System.FormatException: La cadena de entrada no tiene el formato correcto.
+   en System.Number.ParseDouble(String value, NumberStyles options, NumberFormatInfo numfmt)
+   en System.Double.Parse(String s, NumberStyles style, IFormatProvider provider)
+   en Comparendos.servicios.generales.fGestionComparendo.btnGuardar_Click(Object sender, EventArgs e) en D:\Desarrollo\Repositorio\ServiciosIntegrales\Comparendos\Comparendos\servicios\generales\fGestionComparendo.cs:línea 1319 -||- Ubicacion error:Comparendos.servicios.generales.fGestionComparendo <#--13/01/2014 03:51:37 p.m.>
+
+<13/01/2014 03:51:40 p.m.--#> Error: System.NullReferenceException: Referencia a objeto no establecida como instancia de un objeto.
+   en Comparendos.servicios.generales.fGestionComparendo.guardarTestigoComp(Int32 id) en D:\Desarrollo\Repositorio\ServiciosIntegrales\Comparendos\Comparendos\servicios\generales\fGestionComparendo.cs:línea 1636 -||- Ubicacion error:Comparendos.servicios.generales.fGestionComparendo <#--13/01/2014 03:51:40 p.m.>
+
+<13/01/2014 03:58:41 p.m.--#> Inicia aplicacion <#--13/01/2014 03:58:41 p.m.>
+
+<13/01/2014 03:59:48 p.m.--#> Error: System.FormatException: La cadena de entrada no tiene el formato correcto.
+   en System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   en System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   en System.Int32.Parse(String s)
+   en Comparendos.servicios.liquidacion.LiquidacionComparendos.getComparendos() en D:\Desarrollo\Repositorio\ServiciosIntegrales\Comparendos\Comparendos\servicios\liquidacion\LiquidacionComparendos.cs:línea 337
+   en Comparendos.servicios.liquidacion.LiquidacionComparendos.AccionBuscar() en D:\Desarrollo\Repositorio\ServiciosIntegrales\Comparendos\Comparendos\servicios\liquidacion\LiquidacionComparendos.cs:línea 322
+   en Comparendos.servicios.liquidacion.LiquidacionComparendos.btnBuscar_Click(Object sender, EventArgs e) en D:\Desarrollo\Repositorio\ServiciosIntegrales\Comparendos\Comparendos\servicios\liquidacion\LiquidacionComparendos.cs:línea 307 -||- Ubicacion error:Comparendos.servicios.liquidacion.LiquidacionComparendos <#--13/01/2014 03:59:48 p.m.>
+
+<13/01/2014 04:08:07 p.m.--#> Inicia aplicacion <#--13/01/2014 04:08:07 p.m.>
+
+<13/01/2014 04:16:40 p.m.--#> Inicia aplicacion <#--13/01/2014 04:16:40 p.m.>
+
+<13/01/2014 04:22:37 p.m.--#> Inicia aplicacion <#--13/01/2014 04:22:37 p.m.>
+
+<13/01/2014 04:25:33 p.m.--#> Inicia aplicacion <#--13/01/2014 04:25:33 p.m.>
+
+<13/01/2014 04:25:59 p.m.--#> Error: System.ArgumentOutOfRangeException: InvalidArgument=El valor de '0' no es válido para 'SelectedIndex'.
+Nombre del parámetro: SelectedIndex
+   en System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   en Comparendos.servicios.liquidacion.LiquidacionComparendos.getComparendos() en D:\Desarrollo\Repositorio\ServiciosIntegrales\Comparendos\Comparendos\servicios\liquidacion\LiquidacionComparendos.cs:línea 391
+   en Comparendos.servicios.liquidacion.LiquidacionComparendos.txtNroIdentificacion_KeyDown(Object sender, KeyEventArgs e) en D:\Desarrollo\Repositorio\ServiciosIntegrales\Comparendos\Comparendos\servicios\liquidacion\LiquidacionComparendos.cs:línea 569 -||- Ubicacion error:Comparendos.servicios.liquidacion.LiquidacionComparendos <#--13/01/2014 04:25:59 p.m.>
+
+<13/01/2014 04:32:09 p.m.--#> Cierre de aplicación <#--13/01/2014 04:32:09 p.m.>
+
+<13/01/2014 04:39:07 p.m.--#> Inicia aplicacion <#--13/01/2014 04:39:07 p.m.>
+
+<13/01/2014 04:51:25 p.m.--#> Inicia aplicacion <#--13/01/2014 04:51:25 p.m.>
+
+<13/01/2014 05:08:49 p.m.--#> Cierre de aplicación <#--13/01/2014 05:08:49 p.m.>
+

@@ -1,0 +1,24 @@
+<26/12/2013 05:05:53 p.m.--#> Inicia aplicacion <#--26/12/2013 05:05:53 p.m.>
+
+<26/12/2013 05:05:55 p.m.--#> Error: System.Net.WebException: Error de la solicitud con el código de estado HTTP 404: Not Found.
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   en LibreriasSintrat.ServiciosUsuarios.ServiciosUsuariosService.probarConexion(Boolean arg0) en D:\Desarrollo\Repositorio\ServiciosIntegrales\LibreriasSintratMEDELLIN\LibreriasSintrat\Web References\ServiciosUsuarios\Reference.cs:línea 1021
+   en LibreriasSintrat.forms.commons.inicio.verificarConexion() en D:\Desarrollo\Repositorio\ServiciosIntegrales\LibreriasSintratMEDELLIN\LibreriasSintrat\forms\commons\frmLogin.cs:línea 92 -||- Ubicacion error:LibreriasSintrat.forms.commons.inicio <#--26/12/2013 05:05:55 p.m.>
+
+<26/12/2013 05:05:57 p.m.--#> Cancelación de ingreso a la aplicación por petición del usuario <#--26/12/2013 05:05:57 p.m.>
+
+<26/12/2013 05:07:07 p.m.--#> Inicia aplicacion <#--26/12/2013 05:07:07 p.m.>
+
+<26/12/2013 05:07:08 p.m.--#> Error: System.Net.WebException: Error de la solicitud con el código de estado HTTP 404: Not Found.
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   en LibreriasSintrat.ServiciosUsuarios.ServiciosUsuariosService.probarConexion(Boolean arg0) en D:\Desarrollo\Repositorio\ServiciosIntegrales\LibreriasSintratMEDELLIN\LibreriasSintrat\Web References\ServiciosUsuarios\Reference.cs:línea 1021
+   en LibreriasSintrat.forms.commons.inicio.verificarConexion() en D:\Desarrollo\Repositorio\ServiciosIntegrales\LibreriasSintratMEDELLIN\LibreriasSintrat\forms\commons\frmLogin.cs:línea 92 -||- Ubicacion error:LibreriasSintrat.forms.commons.inicio <#--26/12/2013 05:07:08 p.m.>
+
+<26/12/2013 05:07:09 p.m.--#> Cancelación de ingreso a la aplicación por petición del usuario <#--26/12/2013 05:07:09 p.m.>
+
+<26/12/2013 05:09:14 p.m.--#> Inicia aplicacion <#--26/12/2013 05:09:14 p.m.>
+
+<26/12/2013 05:09:30 p.m.--#> Cierre de aplicación <#--26/12/2013 05:09:30 p.m.>
+

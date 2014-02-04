@@ -1,0 +1,91 @@
+<08/01/2014 12:48:01 p.m.--#> Inicia aplicacion <#--08/01/2014 12:48:01 p.m.>
+
+<08/01/2014 12:53:54 p.m.--#> Inicia aplicacion <#--08/01/2014 12:53:54 p.m.>
+
+<08/01/2014 02:10:54 p.m.--#> Inicia aplicacion <#--08/01/2014 02:10:54 p.m.>
+
+<08/01/2014 02:24:08 p.m.--#> Cierre de aplicación <#--08/01/2014 02:24:08 p.m.>
+
+<08/01/2014 02:34:47 p.m.--#> Inicia aplicacion <#--08/01/2014 02:34:47 p.m.>
+
+<08/01/2014 02:35:48 p.m.--#> Cierre de aplicación <#--08/01/2014 02:35:48 p.m.>
+
+<08/01/2014 02:39:51 p.m.--#> Inicia aplicacion <#--08/01/2014 02:39:51 p.m.>
+
+<08/01/2014 02:40:30 p.m.--#> Cierre de aplicación <#--08/01/2014 02:40:30 p.m.>
+
+<08/01/2014 02:47:53 p.m.--#> Inicia aplicacion <#--08/01/2014 02:47:53 p.m.>
+
+<08/01/2014 02:49:03 p.m.--#> Inicia aplicacion <#--08/01/2014 02:49:03 p.m.>
+
+<08/01/2014 02:53:54 p.m.--#> Inicia aplicacion <#--08/01/2014 02:53:54 p.m.>
+
+<08/01/2014 02:54:49 p.m.--#> Cierre de aplicación <#--08/01/2014 02:54:49 p.m.>
+
+<08/01/2014 02:56:11 p.m.--#> Inicia aplicacion <#--08/01/2014 02:56:11 p.m.>
+
+<08/01/2014 02:56:59 p.m.--#> Cierre de aplicación <#--08/01/2014 02:56:59 p.m.>
+
+<08/01/2014 02:58:07 p.m.--#> Inicia aplicacion <#--08/01/2014 02:58:07 p.m.>
+
+<08/01/2014 02:58:43 p.m.--#> Cierre de aplicación <#--08/01/2014 02:58:43 p.m.>
+
+<08/01/2014 03:01:26 p.m.--#> Inicia aplicacion <#--08/01/2014 03:01:26 p.m.>
+
+<08/01/2014 03:02:05 p.m.--#> Cierre de aplicación <#--08/01/2014 03:02:05 p.m.>
+
+<08/01/2014 03:02:50 p.m.--#> Inicia aplicacion <#--08/01/2014 03:02:50 p.m.>
+
+<08/01/2014 03:04:33 p.m.--#> Cierre de aplicación <#--08/01/2014 03:04:33 p.m.>
+
+<08/01/2014 03:21:29 p.m.--#> Inicia aplicacion <#--08/01/2014 03:21:29 p.m.>
+
+<08/01/2014 03:40:03 p.m.--#> Inicia aplicacion <#--08/01/2014 03:40:03 p.m.>
+
+<08/01/2014 03:45:18 p.m.--#> Cierre de aplicación <#--08/01/2014 03:45:18 p.m.>
+
+<08/01/2014 03:50:30 p.m.--#> Inicia aplicacion <#--08/01/2014 03:50:30 p.m.>
+
+<08/01/2014 04:04:40 p.m.--#> Cierre de aplicación <#--08/01/2014 04:04:40 p.m.>
+
+<08/01/2014 04:11:43 p.m.--#> Inicia aplicacion <#--08/01/2014 04:11:43 p.m.>
+
+<08/01/2014 04:11:47 p.m.--#> Cancelación de ingreso a la aplicación por petición del usuario <#--08/01/2014 04:11:47 p.m.>
+
+<08/01/2014 04:16:22 p.m.--#> Inicia aplicacion <#--08/01/2014 04:16:22 p.m.>
+
+<08/01/2014 04:17:18 p.m.--#> Error: System.ArgumentOutOfRangeException: InvalidArgument=El valor de '0' no es válido para 'SelectedIndex'.
+Nombre del parámetro: SelectedIndex
+   en System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   en Comparendos.servicios.liquidacion.LiquidacionComparendos.getComparendos() en D:\Desarrollo\Repositorio\ServiciosIntegrales\Comparendos\Comparendos\servicios\liquidacion\LiquidacionComparendos.cs:línea 389
+   en Comparendos.servicios.liquidacion.LiquidacionComparendos.AccionBuscar() en D:\Desarrollo\Repositorio\ServiciosIntegrales\Comparendos\Comparendos\servicios\liquidacion\LiquidacionComparendos.cs:línea 322
+   en Comparendos.servicios.liquidacion.LiquidacionComparendos.btnBuscar_Click(Object sender, EventArgs e) en D:\Desarrollo\Repositorio\ServiciosIntegrales\Comparendos\Comparendos\servicios\liquidacion\LiquidacionComparendos.cs:línea 307 -||- Ubicacion error:Comparendos.servicios.liquidacion.LiquidacionComparendos <#--08/01/2014 04:17:18 p.m.>
+
+<08/01/2014 04:17:42 p.m.--#> Cierre de aplicación <#--08/01/2014 04:17:42 p.m.>
+
+<08/01/2014 04:18:44 p.m.--#> Inicia aplicacion <#--08/01/2014 04:18:44 p.m.>
+
+<08/01/2014 04:43:35 p.m.--#> Inicia aplicacion <#--08/01/2014 04:43:35 p.m.>
+
+<08/01/2014 04:46:52 p.m.--#> Inicia aplicacion <#--08/01/2014 04:46:52 p.m.>
+
+<08/01/2014 04:48:02 p.m.--#> Cierre de aplicación <#--08/01/2014 04:48:02 p.m.>
+
+<08/01/2014 04:50:24 p.m.--#> Inicia aplicacion <#--08/01/2014 04:50:24 p.m.>
+
+<08/01/2014 04:54:22 p.m.--#> Cierre de aplicación <#--08/01/2014 04:54:22 p.m.>
+
+<08/01/2014 04:59:33 p.m.--#> Inicia aplicacion <#--08/01/2014 04:59:33 p.m.>
+
+<08/01/2014 05:01:06 p.m.--#> Cierre de aplicación <#--08/01/2014 05:01:06 p.m.>
+
+<08/01/2014 05:40:45 p.m.--#> Inicia aplicacion <#--08/01/2014 05:40:45 p.m.>
+
+<08/01/2014 05:58:03 p.m.--#> Cierre de aplicación <#--08/01/2014 05:58:03 p.m.>
+
+<08/01/2014 06:09:47 p.m.--#> Inicia aplicacion <#--08/01/2014 06:09:47 p.m.>
+
+<08/01/2014 06:29:32 p.m.--#> Inicia aplicacion <#--08/01/2014 06:29:32 p.m.>
+
+<08/01/2014 06:38:17 p.m.--#> Cierre de aplicación <#--08/01/2014 06:38:17 p.m.>
+

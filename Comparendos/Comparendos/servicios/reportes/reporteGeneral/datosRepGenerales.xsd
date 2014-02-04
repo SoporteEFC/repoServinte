@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="datosRepGenerales" targetNamespace="http://tempuri.org/datosRepGenerales.xsd" xmlns:mstns="http://tempuri.org/datosRepGenerales.xsd" xmlns="http://tempuri.org/datosRepGenerales.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="datosRepGenerales" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="datosRepGenerales" msprop:Generator_UserDSName="datosRepGenerales" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="datosRepGenerales" msprop:Generator_UserTableName="datosRepGenerales" msprop:Generator_RowDeletedName="datosRepGeneralesRowDeleted" msprop:Generator_TableClassName="datosRepGeneralesDataTable" msprop:Generator_RowChangedName="datosRepGeneralesRowChanged" msprop:Generator_RowClassName="datosRepGeneralesRow" msprop:Generator_RowChangingName="datosRepGeneralesRowChanging" msprop:Generator_RowEvArgName="datosRepGeneralesRowChangeEvent" msprop:Generator_RowEvHandlerName="datosRepGeneralesRowChangeEventHandler" msprop:Generator_TablePropName="_datosRepGenerales" msprop:Generator_TableVarName="tabledatosRepGenerales" msprop:Generator_RowDeletingName="datosRepGeneralesRowDeleting">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NUMEROCOMPARENDO" msprop:Generator_UserColumnName="NUMEROCOMPARENDO" msprop:Generator_ColumnPropNameInRow="NUMEROCOMPARENDO" msprop:Generator_ColumnVarNameInTable="columnNUMEROCOMPARENDO" msprop:Generator_ColumnPropNameInTable="NUMEROCOMPARENDOColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="PLACA" msprop:Generator_UserColumnName="PLACA" msprop:Generator_ColumnPropNameInRow="PLACA" msprop:Generator_ColumnVarNameInTable="columnPLACA" msprop:Generator_ColumnPropNameInTable="PLACAColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="COD_INFRACCION" msprop:Generator_UserColumnName="COD_INFRACCION" msprop:Generator_ColumnPropNameInRow="COD_INFRACCION" msprop:Generator_ColumnVarNameInTable="columnCOD_INFRACCION" msprop:Generator_ColumnPropNameInTable="COD_INFRACCIONColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="ESTADO" msprop:Generator_UserColumnName="ESTADO" msprop:Generator_ColumnPropNameInRow="ESTADO" msprop:Generator_ColumnVarNameInTable="columnESTADO" msprop:Generator_ColumnPropNameInTable="ESTADOColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="VALORINFRACCION" msprop:Generator_UserColumnName="VALORINFRACCION" msprop:Generator_ColumnPropNameInRow="VALORINFRACCION" msprop:Generator_ColumnVarNameInTable="columnVALORINFRACCION" msprop:Generator_ColumnPropNameInTable="VALORINFRACCIONColumn" type="xs:double" minOccurs="0" />
+              <xs:element name="NOMBRES" msprop:Generator_UserColumnName="NOMBRES" msprop:Generator_ColumnPropNameInRow="NOMBRES" msprop:Generator_ColumnVarNameInTable="columnNOMBRES" msprop:Generator_ColumnPropNameInTable="NOMBRESColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="APELLIDOS" msprop:Generator_UserColumnName="APELLIDOS" msprop:Generator_ColumnPropNameInRow="APELLIDOS" msprop:Generator_ColumnVarNameInTable="columnAPELLIDOS" msprop:Generator_ColumnPropNameInTable="APELLIDOSColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="NROIDENTIFICACION" msprop:Generator_UserColumnName="NROIDENTIFICACION" msprop:Generator_ColumnPropNameInRow="NROIDENTIFICACION" msprop:Generator_ColumnVarNameInTable="columnNROIDENTIFICACION" msprop:Generator_ColumnPropNameInTable="NROIDENTIFICACIONColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

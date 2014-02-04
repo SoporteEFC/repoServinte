@@ -1,0 +1,14 @@
+<24/03/2013 10:40:31 a.m.--#> Inicia aplicacion <#--24/03/2013 10:40:31 a.m.>
+
+<24/03/2013 10:40:36 a.m.--#> Error: System.Net.WebException: Error de la solicitud con el código de estado HTTP 404: Not Found.
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.ReadResponse(SoapClientMessage message, WebResponse response, Stream responseStream, Boolean asyncCall)
+   en System.Web.Services.Protocols.SoapHttpClientProtocol.Invoke(String methodName, Object[] parameters)
+   en LibreriasSintrat.ServiciosUsuarios.ServiciosUsuariosService.probarConexion(Boolean arg0) en D:\Desarrollo\Repositorio\TransitoCsharp\LibreriasSintrat\LibreriasSintrat\Web References\ServiciosUsuarios\Reference.cs:línea 903
+   en LibreriasSintrat.forms.commons.inicio.verificarConexion() en D:\Desarrollo\Repositorio\TransitoCsharp\LibreriasSintrat\LibreriasSintrat\forms\commons\frmLogin.cs:línea 80 -||- Ubicacion error:LibreriasSintrat.forms.commons.inicio <#--24/03/2013 10:40:36 a.m.>
+
+<24/03/2013 10:40:40 a.m.--#> Cancelación de ingreso a la aplicación por petición del usuario <#--24/03/2013 10:40:40 a.m.>
+
+<24/03/2013 10:40:55 a.m.--#> Inicia aplicacion <#--24/03/2013 10:40:55 a.m.>
+
+<24/03/2013 10:41:08 a.m.--#> Cierre de aplicación <#--24/03/2013 10:41:08 a.m.>
+

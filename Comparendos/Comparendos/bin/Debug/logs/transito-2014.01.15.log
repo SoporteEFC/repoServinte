@@ -1,0 +1,42 @@
+<15/01/2014 08:09:37 a.m.--#> Inicia aplicacion <#--15/01/2014 08:09:37 a.m.>
+
+<15/01/2014 08:25:16 a.m.--#> Inicia aplicacion <#--15/01/2014 08:25:16 a.m.>
+
+<15/01/2014 11:40:48 a.m.--#> Inicia aplicacion <#--15/01/2014 11:40:48 a.m.>
+
+<15/01/2014 12:24:38 p.m.--#> Inicia aplicacion <#--15/01/2014 12:24:38 p.m.>
+
+<15/01/2014 12:50:33 p.m.--#> Inicia aplicacion <#--15/01/2014 12:50:33 p.m.>
+
+<15/01/2014 12:55:51 p.m.--#> Inicia aplicacion <#--15/01/2014 12:55:51 p.m.>
+
+<15/01/2014 12:58:36 p.m.--#> Inicia aplicacion <#--15/01/2014 12:58:36 p.m.>
+
+<15/01/2014 02:41:55 p.m.--#> Inicia aplicacion <#--15/01/2014 02:41:55 p.m.>
+
+<15/01/2014 03:19:21 p.m.--#> Cierre de aplicación <#--15/01/2014 03:19:21 p.m.>
+
+<15/01/2014 03:24:55 p.m.--#> Inicia aplicacion <#--15/01/2014 03:24:55 p.m.>
+
+<15/01/2014 03:25:51 p.m.--#> Error: System.ArgumentOutOfRangeException: InvalidArgument=El valor de '0' no es válido para 'SelectedIndex'.
+Nombre del parámetro: SelectedIndex
+   en System.Windows.Forms.ComboBox.set_SelectedIndex(Int32 value)
+   en Comparendos.servicios.liquidacion.LiquidacionComparendos.getComparendos() en D:\Desarrollo\Repositorio\ServiciosIntegrales\Comparendos\Comparendos\servicios\liquidacion\LiquidacionComparendos.cs:línea 391
+   en Comparendos.servicios.liquidacion.LiquidacionComparendos.txtNroIdentificacion_KeyDown(Object sender, KeyEventArgs e) en D:\Desarrollo\Repositorio\ServiciosIntegrales\Comparendos\Comparendos\servicios\liquidacion\LiquidacionComparendos.cs:línea 569 -||- Ubicacion error:Comparendos.servicios.liquidacion.LiquidacionComparendos <#--15/01/2014 03:25:51 p.m.>
+
+<15/01/2014 03:26:44 p.m.--#> Cierre de aplicación <#--15/01/2014 03:26:44 p.m.>
+
+<15/01/2014 03:27:18 p.m.--#> Inicia aplicacion <#--15/01/2014 03:27:18 p.m.>
+
+<15/01/2014 03:31:28 p.m.--#> Inicia aplicacion <#--15/01/2014 03:31:28 p.m.>
+
+<15/01/2014 03:54:26 p.m.--#> Inicia aplicacion <#--15/01/2014 03:54:26 p.m.>
+
+<15/01/2014 04:00:53 p.m.--#> Inicia aplicacion <#--15/01/2014 04:00:53 p.m.>
+
+<15/01/2014 05:00:25 p.m.--#> Inicia aplicacion <#--15/01/2014 05:00:25 p.m.>
+
+<15/01/2014 05:01:40 p.m.--#> Cierre de aplicación <#--15/01/2014 05:01:40 p.m.>
+
+<15/01/2014 05:05:52 p.m.--#> Inicia aplicacion <#--15/01/2014 05:05:52 p.m.>
+

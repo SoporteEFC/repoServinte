@@ -13,6 +13,7 @@ using LibreriasSintrat.utilidades;
 using TransitoPrincipal;
 using LibreriasSintrat.ServiciosLogs;
 using LibreriasSintrat.ServiciosUsuarios;
+using TransportePublico.utilidades;
 
 
 //cupos empresa

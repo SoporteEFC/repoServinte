@@ -13,7 +13,7 @@ using TransportePublico.servicios.reportes.vidaUtilVehiculo;
 using LibreriasSintrat.utilidades;
 using LibreriasSintrat.ServiciosLogs;
 using LibreriasSintrat.ServiciosUsuarios;
-using TransportePublico.utilidades; 
+ 
 
 namespace TransportePublico.servicios.vehiculos
 {

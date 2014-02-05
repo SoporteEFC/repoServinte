@@ -12,7 +12,7 @@ using LibreriasSintrat.ServiciosPropietarios;
 using LibreriasSintrat.utilidades;
 using LibreriasSintrat.ServiciosLogs;
 using LibreriasSintrat.ServiciosUsuarios;
-using TransportePublico.utilidades; 
+ 
 
 
 namespace TransportePublico.servicios.vehiculos

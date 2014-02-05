@@ -20,7 +20,7 @@ using LibreriasSintrat.utilidades;
 using TransitoPrincipal;
 using LibreriasSintrat.ServiciosLogs;
 using LibreriasSintrat.ServiciosUsuarios;
-using TransportePublico.utilidades;
+
 using LibreriasSintrat.utilidades;
 
 namespace TransportePublico.servicios.cupos

@@ -22,7 +22,7 @@ using LibreriasSintrat.ServiciosPropietarios;
 using LibreriasSintrat.utilidades;
 using LibreriasSintrat.ServiciosLogs;
 using LibreriasSintrat.ServiciosUsuarios;
-using TransportePublico.utilidades;
+
 using LibreriasSintrat.utilidades;
 //using LibreriasSintrat.ServiciosErroresSW;
 

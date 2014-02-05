@@ -21,7 +21,7 @@ using System.IO;
 using LibreriasSintrat.ServiciosLogs;
 using LibreriasSintrat.ServiciosLogs;
 using LibreriasSintrat.ServiciosUsuarios;
-using TransportePublico.utilidades;
+
 
 namespace TransportePublico.servicios.tramites
 {

@@ -19,6 +19,7 @@ using LibreriasSintrat.forms.commons;
 using Comparendos.servicios.documentos;
 using TransportePublico.servicios;
 using LibreriasSintrat.ServiciosLogs;
+using TransportePublico.utilidades;
 
 using LibreriasSintrat.ServiciosErroresSW;
 
